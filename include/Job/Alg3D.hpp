@@ -1,6 +1,7 @@
 #ifndef ALG3D_HPP
 #define ALG3D_HPP
 
+#include "CustomException.hpp"
 #include "Alg.hpp"
 #include "NumRandom.hpp"
 
@@ -26,7 +27,7 @@ namespace Job
         virtual ~Alg3D();
 
         //>>>-----------------------------------------------------------------------
-        // member function
+        // override function
 
         virtual bool inspect() override;
 

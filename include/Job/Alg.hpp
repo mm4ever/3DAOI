@@ -1,6 +1,9 @@
 #ifndef ALG_HPP
 #define ALG_HPP
 
+#include "CustomException.hpp"
+#include "Inspection.hpp"
+
 namespace Job
 {
 
@@ -16,7 +19,7 @@ namespace Job
      *  @version 1.00 2018-01-05 lynn
      *                note:create it
      */
-    class Alg
+    class Alg:public Inspection
     {
     public:
 
@@ -26,11 +29,6 @@ namespace Job
         Alg();
 
         virtual ~Alg();
-
-        //>>>-----------------------------------------------------------------------
-        // member function
-
-        virtual bool inspect() = 0;
 
         //<<<-----------------------------------------------------------------------
     };
