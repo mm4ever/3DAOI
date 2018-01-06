@@ -11,7 +11,7 @@ SOURCES += \
     PathSetting.cpp \
     Sequence.cpp \
     StartupWnd.cpp \
-    UiManager.cpp
+    UIManager.cpp
 
 HEADERS += \
     App.hpp \
@@ -22,6 +22,6 @@ HEADERS += \
     PathSetting.hpp \
     Sequence.hpp \
     StartupWnd.hpp \
-    UiManager.hpp
+    UIManager.hpp
 
 include(dependencies.pri)

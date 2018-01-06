@@ -7,8 +7,8 @@
 namespace APP
 {
 
-    static Sequence seq;
-    static AppService appService;
+    Sequence seq;
+    AppService appService;
 
 }// End of namespace APP
 

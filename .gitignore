@@ -3,8 +3,10 @@
 
 /debug/
 /release/
-/src/*.so
-/src/*.so.*
+/src/Job/build/linux/debug/*.so
+/src/Job/build/linux/debug/*.so.*
+/src/SSDK/build/linux/debug/*.so
+/src/SSDK/build/linux/debug/*.so.*
 
 *~
 *.autosave

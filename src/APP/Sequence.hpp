@@ -2,7 +2,7 @@
 #define SEQUENCER_HPP
 
 #include "InspectionManager.hpp"
-#include "UiManager.hpp"
+#include "UIManager.hpp"
 
 namespace APP
 {
