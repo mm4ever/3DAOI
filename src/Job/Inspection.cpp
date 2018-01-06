@@ -1,21 +1,16 @@
-#include "Alg3D.hpp"
+#include "Inspection.hpp"
 
 using namespace Job;
-using namespace SSDK;
 
 //>>>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // constructor & destructor
 
-Alg3D::Alg3D()
+Inspection::Inspection()
 {
-    try
-    {
-        this->m_algType = AlgType::ALG3D;
-    }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("构造函数出错");
+
 }
 
-Alg3D::~Alg3D()
+Inspection::~Inspection()
 {
 
 }
@@ -24,16 +19,11 @@ Alg3D::~Alg3D()
 
 
 //>>>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// member function
+// virtual function
 
-bool Alg3D::inspect()
+bool Inspection::inspect()
 {
-    try
-    {
-        double falseProbability = 0.4;
-        return (NumRandom::randomBool(falseProbability));
-    }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("模拟3D检测出错");
+
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

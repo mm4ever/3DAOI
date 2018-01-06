@@ -7,7 +7,10 @@ using namespace Job;
 
 Alg::Alg()
 {
-
+    try
+    {
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("构造函数出错");
 }
 
 Alg::~Alg()

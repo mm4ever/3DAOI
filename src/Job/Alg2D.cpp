@@ -8,7 +8,11 @@ using namespace SSDK;
 
 Alg2D::Alg2D()
 {
-
+    try
+    {
+        this->m_algType = AlgType::ALG2D;
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("构造函数出错");
 }
 
 Alg2D::~Alg2D()
@@ -23,8 +27,12 @@ Alg2D::~Alg2D()
 
 bool Alg2D::inspect()
 {
-    double falseProbability = 0.2;
-    return (NumRandom::randomBool(falseProbability));
+    try
+    {
+        double falseProbability = 0.2;
+        return (NumRandom::randomBool(falseProbability));
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("模拟检测出错");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
