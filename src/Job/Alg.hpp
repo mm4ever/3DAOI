@@ -48,7 +48,7 @@ namespace Job
 
         AlgType algType(){return this->m_algType;}
 
-    private:
+    protected:
 
         //>>>-----------------------------------------------------------------------
         // member variant

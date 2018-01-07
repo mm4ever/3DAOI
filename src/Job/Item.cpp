@@ -11,10 +11,7 @@ Item::Item()
     {
 
     }
-    catch(...)
-    {
-        THROW_EXCEPTION("构造函数出错");
-    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("构造函数出错");
 }
 
 Item::~Item()
@@ -39,10 +36,7 @@ bool Item::inspect()
 
         return this->m_pAlg->inspect();
     }
-    catch(...)
-    {
-        THROW_EXCEPTION("检测item出错");
-    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("检测item出错");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
