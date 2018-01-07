@@ -68,7 +68,7 @@ namespace Job
         int m_id{0};
         std::string m_name;
         MainItem m_mainItem;
-        std::vector<SubItem> m_itemList;
+        std::vector<SubItem> m_itemList;        //TBCL:改名
 
         //<<<-----------------------------------------------------------------------
     };

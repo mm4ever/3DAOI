@@ -1,6 +1,8 @@
 #ifndef MEASUREDOBJ_HPP
 #define MEASUREDOBJ_HPP
 
+#include "CustomException.hpp"
+#include "Inspection.hpp"
 #include "Rectangle.hpp"
 #include "Library.hpp"
 
@@ -10,10 +12,25 @@ namespace Job
     enum class MeasuredObjType
     {
         FIDUCIALMARK,
-        COMPONENT
+        CHIP,
+        BGA,
+        SOT,
+        SOP,
+        QFN,
+        QFP
     };
+
     /**
      *  @brief MeasuredObj
+     *          表示一个检测过的目标的类，存有以下信息：
+     *          1.id号
+     *          2.名字
+     *          3.检测结果是否为OK
+     *          4.位置和大小信息
+     *          5.检测库
+     *          6.检测元件类型信息
+     *          具有以下功能：
+     *          模拟检测并记录检测结果
      *
      *  @author lynn
      *  @version 1.00 2018-01-05 lynn
@@ -26,8 +43,18 @@ namespace Job
         //>>>-----------------------------------------------------------------------
         // constructor & destructor
 
+        /**
+        *  @brief   默认构造函数
+        *  @param   N/A
+        *  @return  N/A
+        */
         MeasuredObj();
 
+        /**
+        *  @brief   析构函数
+        *  @param   N/A
+        *  @return  N/A
+        */
         virtual ~MeasuredObj();
 
         //>>>-----------------------------------------------------------------------
@@ -49,10 +76,15 @@ namespace Job
         //>>>-----------------------------------------------------------------------
         // member function
 
+        /**
+        *  @brief   模拟元件的检测并记录检测结果
+        *  @param   N/A
+        *  @return  N/A
+        */
         void inspect();
 
 
-    private:
+    protected:
 
         //>>>-----------------------------------------------------------------------
         // member variant
