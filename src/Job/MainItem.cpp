@@ -7,12 +7,32 @@ using namespace Job;
 
 MainItem::MainItem()
 {
-
+    try
+    {
+        this->m_pAlg = new Alg3D;
+    }
+    catch(...)
+    {
+        THROW_EXCEPTION("构造函数出错");
+    }
 }
 
 MainItem::~MainItem()
 {
-
+    try
+    {
+        if(nullptr != this->m_pAlg)
+        {
+            delete this->m_pAlg;
+        }
+    }
+    catch(...)
+    {
+        if(nullptr != this->m_pAlg)
+        {
+            delete this->m_pAlg;
+        }
+    }
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
