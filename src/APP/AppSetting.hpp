@@ -3,18 +3,15 @@
 
 #include <iostream>
 
+#include <QFile>
+#include <QSettings>
+
+#include "CustomException.hpp"
+#include "FormatConvertor.hpp"
+
 namespace APP
 {
 
-    /**
-     * @brief The MachineName enum
-     *      机器名称
-     */
-    enum class MachineName
-    {
-        AOI,    // 自动光学检测设备
-        SPI     // 锡膏检测设备
-    };
     /**
      * @brief The Theme enum
      *      机器软件界面使用的主题
@@ -46,6 +43,9 @@ namespace APP
 
     /**
      *  @brief AppSetting
+     *          AppSetting类是存放配置文件的类,配置文件包括主题、语言等
+     *      不是程序运行时所必需的配置;如果不存在则直接创建默认的配置,存在则配
+     *      置是否正确,不正确则使用默认参数.
      *
      *  @author peter
      *  @version 1.00 2018-01-06 peter
@@ -62,9 +62,42 @@ namespace APP
         virtual~AppSetting();
 
         //>>>-------------------------------------------------------------------
+        // get & set function
+
+        void setCompanyName(QString companyName)
+        {
+            this->m_companyName = companyName;
+        }
+        QString companyName(){return this->m_companyName;}
+
+        void setMachineName(QString machineName)
+        {
+            this->m_machineName = machineName;
+        }
+        QString machineName(){return this->m_machineName;}
+
+        void setTheme(Theme theme){ this->m_theme = theme;}
+        Theme theme(){return this->m_theme;}
+
+        void setLanguage(Language lang){ this->m_language = lang;}
+        Language language(){return this->m_language;}
+
+        void setLaneMode(LaneMode laneMode){ this->m_laneMode = laneMode;}
+        LaneMode laneMode(){return this->m_laneMode;}
+
+
+
+        //>>>-------------------------------------------------------------------
         // member function
 
-        void load(std::string& appPath);
+        /**
+         *  @brief load
+         *      该函数功能是读取配置文件中的信息
+         *  @param appPath
+         *      待读取的配置文件路径
+         *  @return N/A
+         */
+        void load(const QString& appPath);
 
 
     private:
@@ -72,11 +105,11 @@ namespace APP
         //>>>-------------------------------------------------------------------
         // member variant
 
-        std::string m_companyName {""};             // 公司名称
-        std::string m_machineName {""};             // 机器名称
+        QString m_companyName {"Sung"};             // 公司名称
+        QString m_machineName {"SPI"};              // 机器名称
         Theme m_theme {Theme::BLACK};               // 软件主题
-        Language m_lang {Language::CN};             // 软件语言
-        LaneMode m_laneMode {LaneMode::DUAL_LANE};  // 软件运行的模式
+        Language m_language {Language::CN};         // 软件语言
+        LaneMode m_laneMode {LaneMode::SIMULATOR};  // 机器种类
 
         //<<<-------------------------------------------------------------------
 

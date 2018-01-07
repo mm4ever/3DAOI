@@ -7,7 +7,11 @@ using namespace APP;
 
 AppService::AppService()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Constructor error!");
 }
 
 AppService::~AppService()
@@ -23,7 +27,8 @@ AppService::~AppService()
 
 void AppService::init()
 {
-
+    this->m_pathSetting.load(this->m_pathSettingPath);
+    this->m_appSetting.load(this->m_pathSetting.appSettingPath());
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
