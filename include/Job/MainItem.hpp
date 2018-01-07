@@ -2,12 +2,20 @@
 #define MAINITEM_HPP
 
 #include "Item.hpp"
+#include "Alg3D.hpp"
 
 namespace Job
 {
     /**
      *  @brief MainItem
-     *
+     *          表示一个检测MainItem的类，存有以下信息：
+     *              1.所在检测lib的ID
+     *              2.当前MainItem的ID
+     *              3.与MainItem符合的矩形信息
+     *              4.MainItem的名称
+     *              5.MainItem使用的算法
+     *          具有以下功能：
+     *              模拟检测返回检测结果
      *  @author lynn
      *  @version 1.00 2018-01-05 lynn
      *                note:create it
@@ -19,8 +27,18 @@ namespace Job
         //>>>-----------------------------------------------------------------------
         // constructor & destructor
 
+        /**
+        *  @brief   默认构造函数，加入3D检测算法
+        *  @param   N/A
+        *  @return  N/A
+        */
         MainItem();
 
+        /**
+        *  @brief   析构函数,释放用于存放算法的空间
+        *  @param   N/A
+        *  @return  N/A
+        */
         ~MainItem();
 
         //<<<-----------------------------------------------------------------------

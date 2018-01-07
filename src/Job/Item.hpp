@@ -70,7 +70,7 @@ namespace Job
         virtual bool inspect() override;
 
 
-    private:
+    protected:
 
         //>>>-----------------------------------------------------------------------
         //member variant
