@@ -7,7 +7,7 @@
 namespace APP
 {
 
-    Sequence seq;
+    Sequence sequence;
     AppService appService;
 
 }// End of namespace APP
