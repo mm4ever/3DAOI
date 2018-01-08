@@ -35,7 +35,7 @@ namespace SSDK
         throw SSDK::CustomException(msg);\
     }
     #define CATCH_AND_PRINT_EXCEPTION()\
-    catch( SDK::CustomException& ex )\
+    catch( SSDK::CustomException& ex )\
     {\
         std::cout << ex.what() << std::endl;\
     }

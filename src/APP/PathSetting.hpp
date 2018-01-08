@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+#include <QDir>
 #include <QFile>
 #include <QSettings>
 

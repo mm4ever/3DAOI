@@ -108,6 +108,20 @@ void AppSetting::load(const QString& appPath)
                 this->m_laneMode = LaneMode::DUAL_LANE;
             }
         }
+        else
+        {
+            // 没有配置文件则写入默认配置
+            QSettings configFile(appPath,QSettings::IniFormat);
+
+            configFile.setValue( "Company",m_companyName);
+            configFile.setValue( "Machine",m_machineName);
+            configFile.setValue( "Theme",
+                                 QString::fromStdString(VAR_TO_STR(Theme::BLACK)) );
+            configFile.setValue( "Language",
+                                  QString::fromStdString(VAR_TO_STR(Language::EN)) );
+            configFile.setValue( "LaneMode",
+                                 QString::fromStdString(VAR_TO_STR(LaneMode::DUAL_LANE)) );
+        }
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Load config file error!");
 }

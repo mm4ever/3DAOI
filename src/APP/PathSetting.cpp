@@ -55,7 +55,13 @@ void PathSetting::load(const QString& path)
         }
         else
         {
-            THROW_EXCEPTION("PathSetting.ini is not exits!");
+            // 没有配置文件则写入默认配置
+            QSettings configFile(path,QSettings::IniFormat);
+
+            configFile.setValue("AppSettingPath",m_appSettingPath );
+            configFile.setValue("LotInfoPath",m_lotInfoPath);
+            configFile.setValue("DefaultJobFolderPath",m_defaultJobFolderPath);
+            configFile.setValue("InspectionSettingPath",m_inspectionSettingPath);
         }
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Load config file error!");
