@@ -7,7 +7,11 @@ using namespace Job;
 
 MeasuredObj::MeasuredObj()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("构造函数出错");
 }
 
 MeasuredObj::~MeasuredObj()
@@ -23,7 +27,11 @@ MeasuredObj::~MeasuredObj()
 
 void MeasuredObj::inspect()
 {
-
+    try
+    {
+        this->m_isResultOk = this->m_lib.inspect();
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("检测元件时出错");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -7,7 +7,11 @@ using namespace Job;
 
 FiducialMark::FiducialMark()
 {
-
+    try
+    {
+        this->m_measuredObjType = MeasuredObjType::FIDUCIALMARK;
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("构造函数出错");
 }
 
 FiducialMark::~FiducialMark()
