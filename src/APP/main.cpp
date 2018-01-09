@@ -1,6 +1,7 @@
 #include <iostream>
 
-#include "App.hpp"
+#include "GlobalVariable.hpp"
+#include "UIManager.hpp"
 #include "CustomException.hpp"
 
 using namespace std;
@@ -14,13 +15,21 @@ int main()
         //>>>-------------------------------------------------------------------
         // 设置PathSetting.ini路径
         QString pathSettingPath = "./config/PathSetting.ini";
-        appService.setPathSettingPath(pathSettingPath);
 
         //>>>-------------------------------------------------------------------
         // 初始化appService和sequence
-        appService.init();
-        sequence.init();
+        APP::g_pSequence = new Sequence();
+        APP::g_pAppService = new AppService();
 
+        APP::g_pAppService->setPathSettingPath(pathSettingPath);
+
+        APP::g_pAppService->init();
+        APP::g_pSequence->init();
+
+        //>>>-------------------------------------------------------------------
+        // StartupWnd
+        UIManager uiManager;
+        uiManager.run();
 
     }
     CATCH_AND_PRINT_EXCEPTION();

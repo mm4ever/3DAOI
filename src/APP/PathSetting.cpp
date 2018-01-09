@@ -10,9 +10,10 @@ PathSetting::PathSetting()
     try
     {
         this->m_appSettingPath = "./config/AppSetting.ini";
-        this->m_lotInfoPath = "./config/LotInfo.ini";
-        this->m_defaultJobFolderPath = "./config/DefaultJobFolder.ini";
+        this->m_exportXmlPath = "../data/xml/ExportXml.ini";
+        this->m_defaultJobFolderPath = "../data/job/";
         this->m_inspectionSettingPath = "./config/InspectionSetting.ini";
+        this->m_registrationInfoPath = "./config/RegistrationUser.ini";
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Constructor error!");
 }
@@ -42,7 +43,7 @@ void PathSetting::load(const QString& path)
 
             //>>>---------------------------------------------------------------
             // step2.2 加载LotInfoPath
-            this->m_lotInfoPath = configFile.value("LotInfoPath").toString();
+            this->m_exportXmlPath = configFile.value("ExportXmlPath").toString();
 
             //>>>---------------------------------------------------------------
             // step2.3 加载DefaultJobFolderPath
@@ -52,6 +53,10 @@ void PathSetting::load(const QString& path)
             // step2.4 加载InspectionSettingPath
             this->m_inspectionSettingPath = configFile.value("InspectionSettingPath").toString();
 
+            //>>>---------------------------------------------------------------
+            // step2.5 加载RegistrationInfoPath
+            this->m_registrationInfoPath = configFile.value("RegistrationInfoPath").toString();
+
         }
         else
         {
@@ -59,9 +64,10 @@ void PathSetting::load(const QString& path)
             QSettings configFile(path,QSettings::IniFormat);
 
             configFile.setValue("AppSettingPath",m_appSettingPath );
-            configFile.setValue("LotInfoPath",m_lotInfoPath);
+            configFile.setValue("ExportXmlPath",m_exportXmlPath);
             configFile.setValue("DefaultJobFolderPath",m_defaultJobFolderPath);
             configFile.setValue("InspectionSettingPath",m_inspectionSettingPath);
+            configFile.setValue("RegistrationInfoPath",m_registrationInfoPath);
         }
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Load config file error!");

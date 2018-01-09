@@ -11,10 +11,10 @@ SOURCES += \
     PathSetting.cpp \
     Sequence.cpp \
     StartupWnd.cpp \
-    UIManager.cpp
+    UIManager.cpp \
+    GlobalVariable.cpp
 
 HEADERS += \
-    App.hpp \
     AppService.hpp \
     AppSetting.hpp \
     LoginWnd.hpp \
@@ -22,6 +22,7 @@ HEADERS += \
     PathSetting.hpp \
     Sequence.hpp \
     StartupWnd.hpp \
-    UIManager.hpp
+    UIManager.hpp \
+    GlobalVariable.hpp
 
 include(dependencies.pri)
