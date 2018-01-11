@@ -7,7 +7,11 @@ using namespace Job;
 
 Library::Library()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("构造函数出错");
 }
 
 Library::~Library()
@@ -23,7 +27,26 @@ Library::~Library()
 
 bool Library::inspect()
 {
+    try
+    {
+        if(false == this->mainItem().inspect())
+        {
+            return false;
+        }
 
+        std::list<SubItem>::iterator it = this->m_itemList.begin();
+
+        while (it != this->m_itemList.end())
+        {
+            if( false == (*it).inspect() )
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("检测函数出错");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

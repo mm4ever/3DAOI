@@ -37,7 +37,7 @@ namespace Job
 
         void init();
 
-        void loadInspectionSetting(std::string& path);
+        void loadInspectionSetting();
 
         void loadInspectionData(std::string& path);
 
