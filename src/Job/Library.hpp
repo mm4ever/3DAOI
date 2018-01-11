@@ -1,6 +1,8 @@
 #ifndef LIBRARY_HPP
 #define LIBRARY_HPP
 
+#include <list>
+
 #include "Inspection.hpp"
 #include "CustomException.hpp"
 #include "MainItem.hpp"
@@ -46,7 +48,7 @@ namespace Job
 
         MainItem& mainItem(){return this->m_mainItem;}
 
-        std::vector<SubItem>& itemList(){return this->m_itemList;}
+        std::list<SubItem>& itemList(){return this->m_itemList;}
 
         //>>>-----------------------------------------------------------------------
         // override function
@@ -68,7 +70,7 @@ namespace Job
         int m_id{0};
         std::string m_name;
         MainItem m_mainItem;
-        std::vector<SubItem> m_itemList;        //TBCL:改名
+        std::list<SubItem> m_itemList;        //TBCL:改名
 
         //<<<-----------------------------------------------------------------------
     };

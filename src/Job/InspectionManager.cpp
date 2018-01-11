@@ -25,7 +25,7 @@ void InspectionManager::init()
 
 }
 
-void InspectionManager::loadInspectionSetting(string &path)
+void InspectionManager::loadInspectionSetting()
 {
 
 }

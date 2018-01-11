@@ -1,4 +1,4 @@
-#include "MeasuredObj.hpp"
+ #include "MeasuredObj.hpp"
 
 using namespace Job;
 
@@ -29,7 +29,6 @@ void MeasuredObj::inspect()
 {
     try
     {
-        this->m_isResultOk = this->m_lib.inspect();
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("检测元件时出错");
 }

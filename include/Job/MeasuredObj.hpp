@@ -12,12 +12,7 @@ namespace Job
     enum class MeasuredObjType
     {
         FIDUCIALMARK,
-        CHIP,
-        BGA,
-        SOT,
-        SOP,
-        QFN,
-        QFP
+        COMPONENT
     };
 
     /**
@@ -81,7 +76,7 @@ namespace Job
         *  @param   N/A
         *  @return  N/A
         */
-        void inspect();
+        virtual void inspect();
 
 
     protected:

@@ -29,11 +29,11 @@ namespace Job
         // constructor & destructor
 
         /**
-        *  @brief   单参数构造函数，将检测目标的类型设置为传入参数
+        *  @brief   默认构造函数
         *  @param   N/A
         *  @return  N/A
         */
-        Component(MeasuredObjType measuredObjType);
+        Component();
 
         /**
         *  @brief   析构函数
@@ -42,15 +42,15 @@ namespace Job
         */
         virtual~ Component();
 
-
-    private:
+        //>>>-----------------------------------------------------------------------
+        //override function
 
         /**
-        *  @brief   默认构造函数
+        *  @brief   模拟元件的检测并记录检测结果
         *  @param   N/A
         *  @return  N/A
         */
-        Component();
+        virtual void inspect() override;
 
         //<<<-----------------------------------------------------------------------
     };

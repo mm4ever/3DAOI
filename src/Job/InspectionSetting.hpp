@@ -1,6 +1,7 @@
 #ifndef CAPTURESETTING_HPP
 #define CAPTURESETTING_HPP
 
+#include <QString>
 #include <QSettings>
 #include <QFile>
 
