@@ -2,7 +2,6 @@
 #define SEQUENCER_HPP
 
 #include "InspectionManager.hpp"
-#include "UIManager.hpp"
 #include "CustomException.hpp"
 
 namespace APP
@@ -31,8 +30,6 @@ namespace APP
 
         Job::InspectionManager inspectionManager(){return this->m_inspectionManager;}
 
-        UIManager uiManager(){return this->m_uiManager;}
-
         //>>>------------------------------------------------------------------
         // member function
 
@@ -53,7 +50,6 @@ namespace APP
         // member variant
 
         Job::InspectionManager m_inspectionManager;
-        UIManager m_uiManager;
 
         //<<<-------------------------------------------------------------------
     };

@@ -30,7 +30,6 @@ void Sequence::init()
     try
     {
         this->m_inspectionManager.init();
-        this->m_uiManager.init();
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Initialization error!");
 }
