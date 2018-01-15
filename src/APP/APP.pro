@@ -25,4 +25,12 @@ HEADERS += \
     UIManager.hpp \
     GlobalVariable.hpp
 
+INCLUDEPATH += $$PWD/../../include/sqlite
+INCLUDEPATH += $$PWD/../../include
+
+unix::LIBS += -L$$PWD/../lib/ -lsqlite3
+
+unix::LIBS += -L/usr/lib/x86_64-linux-gnu\
+-ldl
+
 include(dependencies.pri)
