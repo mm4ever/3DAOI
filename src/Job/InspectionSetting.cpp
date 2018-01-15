@@ -10,14 +10,8 @@ InspectionSetting::InspectionSetting()
 {
     try
     {
-        this->m_imgWidth = 4096;                //定义图片的宽度为4096
-        this->m_imgHeight = 3072;               //定义图片的高度为3072
-        this->m_imgBit = ImgBit::BIT8;          //相机默认的图像位数为8位
     }
-    catch(...)
-    {
-        THROW_EXCEPTION("构造函数出错");
-    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("构造函数出错");
 }
 
 InspectionSetting::~InspectionSetting()
@@ -31,7 +25,7 @@ InspectionSetting::~InspectionSetting()
 //>>>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // member function
 
-void InspectionSetting::readCaptureSetting(const QString& path)
+void InspectionSetting::load(QString &path)
 {
     try
     {
@@ -92,41 +86,6 @@ void InspectionSetting::readCaptureSetting(const QString& path)
         }
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("读取capture.ini文件异常");
-}
-
-void InspectionSetting::writeCaptureSetting(const QString &path)
-{
-    try
-    {
-        //>>>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        //将类QSettings实例化一个对象
-        //path:存放文件的路径
-        //QSettings::IniFormat: 为存放文件的格式
-        QSettings configFile(path,QSettings::IniFormat);
-
-        //将Image/Width的数据写为系统默认值,默认为"4096"
-        configFile.setValue("Image/Width",this->m_imgWidth);
-        //将Image/Height的数据写为系统默认值,默认为"3072"
-        configFile.setValue("Image/Height",this->m_imgHeight);
-        //将Image/Height的数据写为系统默认值,默认为"BIT8"
-        configFile.setValue("Image/ImgBit","BIT8");
-        //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    }
-    catch(const exception &ex)
-    {
-        //捕获异常,并抛出
-        THROW_EXCEPTION(ex.what());
-    }
-}
-
-void InspectionSetting::init()
-{
-
-}
-
-void InspectionSetting::load(string &path)
-{
-
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -38,7 +38,7 @@ namespace Job
         Board();
 
         /**
-        *  @brief   析构函数
+        *  @brief   析构函数,释放所有存放元件用的空间
         *  @param   N/A
         *  @return  N/A
         */
@@ -51,8 +51,6 @@ namespace Job
 
         std::vector<MeasuredObj *>& pObjs(){return this->m_pObjs;}
 
-        std::vector<MeasuredObj *>& pNgObjs(){return this->m_pNgObjs;}
-
         SSDK::Point& originPoint(){return this->m_originPoint;}
 
         SSDK::Rectangle& rectangle(){return this->m_recatangle;}
@@ -63,7 +61,7 @@ namespace Job
         void writeToXml(std::string& path);
 
         /**
-        *  @brief   检测基板上的所有原件并记录出错的元件
+        *  @brief   检测基板上的所有原件
         *  @param   N/A
         *  @return  N/A
         */
@@ -76,7 +74,6 @@ namespace Job
         // comment variant
 
         std::string m_name;
-        std::vector<MeasuredObj*> m_pNgObjs;
         std::vector<MeasuredObj*> m_pObjs;
         SSDK::Point m_originPoint;
         SSDK::Rectangle m_recatangle;

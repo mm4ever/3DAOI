@@ -7,7 +7,11 @@ using namespace Job;
 
 InspectionData::InspectionData()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("构造函数出错");
 }
 
 InspectionData::~InspectionData()
@@ -28,7 +32,11 @@ void InspectionData::writeToXml(std::string &path)
 
 void InspectionData::inspect()
 {
-
+    try
+    {
+        this->m_board.inspect();
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("检测程式文件时出错");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

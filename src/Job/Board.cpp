@@ -16,7 +16,10 @@ Board::Board()
 
 Board::~Board()
 {
-
+    for(unsigned i = 0;i < this->m_pObjs.size();++i)
+    {
+        delete this->m_pObjs[i];
+    }
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -38,9 +41,17 @@ void Board::inspect()
     {
         for(unsigned i = 0 ; i < this->m_pObjs.size() ; ++ i)
         {
-            if(false == this->m_pObjs[i]->isResultOk())     //TBCL :先检测mark点
+            if(MeasuredObjType::FIDUCIALMARK == this->m_pObjs[i]->measuredObjType())
             {
-                this->m_pNgObjs.push_back(this->m_pObjs[i]);
+                this->m_pObjs[i]->inspect();
+            }
+        }
+
+        for(unsigned i = 0 ; i < this->m_pObjs.size() ; ++ i)
+        {
+            if(MeasuredObjType::COMPONENT == this->m_pObjs[i]->measuredObjType())
+            {
+                this->m_pObjs[i]->inspect();
             }
         }
     }
