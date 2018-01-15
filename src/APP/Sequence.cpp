@@ -16,7 +16,11 @@ Sequence::Sequence()
 
 Sequence::~Sequence()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -38,7 +42,7 @@ void Sequence::inspectCycle()
 {
     try
     {
-//        this->m_inspectionManager.inspect();
+        this->m_inspectionManager.inspect();
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Error!");
 }

@@ -1,5 +1,7 @@
 #include "UIManager.hpp"
 
+using namespace std;
+
 using namespace APP;
 
 //>>>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -16,7 +18,11 @@ UIManager::UIManager()
 
 UIManager::~UIManager()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -27,14 +33,22 @@ UIManager::~UIManager()
 
 void UIManager::init()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Init error!");
 }
 
 void UIManager::run()
 {
-    this->m_pStartupWnd.run();
-    this->m_pLoginWnd.run();
-    this->m_pMainWnd.run();
+    try
+    {
+        this->m_pStartupWnd.run();
+        this->m_pLoginWnd.run();
+        this->m_pMainWnd.run();
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Running UI window error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

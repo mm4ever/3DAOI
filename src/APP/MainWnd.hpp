@@ -15,7 +15,6 @@ namespace APP
      *  @brief MainWnd
      *          MainWnd类是表示程序主界面的类
      *
-     *
      *  @author peter
      *  @version 1.00 2018-01-06 peter
      *                note:create it

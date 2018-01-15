@@ -32,7 +32,7 @@ namespace APP
 
         /**
          * @brief run
-         *      启动界面,显示程序正在加载
+         *      启动界面,显示程序正在加载,模拟软件加载动画
          * @param N/A
          * @return N/A
          */

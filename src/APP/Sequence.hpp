@@ -28,7 +28,7 @@ namespace APP
         //>>>------------------------------------------------------------------
         // get & set function
 
-        Job::InspectionManager inspectionManager(){return this->m_inspectionManager;}
+        Job::InspectionManager& inspectionManager(){return this->m_inspectionManager;}
 
         //>>>------------------------------------------------------------------
         // member function
@@ -42,6 +42,13 @@ namespace APP
          * @return N/A
          */
         void init();
+
+        /**
+         * @brief inspectCycle
+         *      调用InspectionManager中的inspect()函数
+         * @param N/A
+         * @return N/A
+         */
         void inspectCycle();
 
 

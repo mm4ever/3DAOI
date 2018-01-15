@@ -16,7 +16,11 @@ MainWnd::MainWnd()
 
 MainWnd::~MainWnd()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -27,35 +31,39 @@ MainWnd::~MainWnd()
 
 void MainWnd::run()
 {
-    // 扫描检测程式
-    this->scanJobFolder();
-
-    // 加载完程式,检测
-    cout << "Press \"y\" to inspect:" << endl;
-    char inspect {'y'};
-    cin >> inspect;
-    if( 'y' == inspect )
+    try
     {
-        do
+        // 扫描检测程式
+        this->scanJobFolder();
+
+        // 加载完程式,检测
+        cout << "Press \"y\" to inspect:" << endl;
+        char inspect {'y'};
+        cin >> inspect;
+        if( 'y' == inspect )
         {
-            this->inspectClick();
-            cout << "Press \"y\" to inspect again:" << endl;
-            cin.clear();
-            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            cin >> inspect;
-        }while ( 'y' == inspect );
+            do
+            {
+                this->inspectClick();
+                cout << "Press \"y\" to inspect again:" << endl;
+                cin.clear();
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                cin >> inspect;
+            }while ( 'y' == inspect );
+        }
+        cout << "Quit ..." << endl;
     }
-    cout << "Quit ..." << endl;
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Running main window error!");
 }
 
 void MainWnd::scanJobFolder()
 {
     QString path = APP::g_pAppService->pathSetting().defaultJobFolderPath();
-    QDir dir(path);
     try
     {
         //>>>-------------------------------------------------------------------
         // 1.判断文件夹是否存在，不存在则创建
+        QDir dir(path);
         if(!dir.exists())
         {
             std::cout << path.toStdString() << " is not exists!"<< std::endl;
@@ -116,17 +124,29 @@ void MainWnd::scanJobFolder()
 
 void MainWnd::inspectClick()
 {
-    APP::g_pSequence->inspectCycle();
+    try
+    {
+        APP::g_pSequence->inspectCycle();
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Inspect click error!");
 }
 
 void MainWnd::loadJob(const QString& jobPath)
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Load job file error!");
 }
 
 void MainWnd::createDefaultJob(const QString& jobName)
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Create default job file error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

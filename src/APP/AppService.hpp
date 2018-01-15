@@ -10,7 +10,7 @@ namespace APP
 {
     /**
      *  @brief AppSerivice
-     *      该类存放了pathSettingPath路径和各配置的类
+     *      该类是存放pathSettingPath路径配置的类
      *  @author peter
      *  @version 1.00 2018-01-05 peter
      *                note:create it
@@ -32,19 +32,19 @@ namespace APP
         {
             this->m_pathSettingPath = path;
         }
-        QString pathSettingPaht(){return this->m_pathSettingPath;}
+        QString& pathSettingPaht(){return this->m_pathSettingPath;}
 
         void setPathSetting(PathSetting& pathSetting)
         {
             this->m_pathSetting = pathSetting;
         }
-        PathSetting pathSetting(){return this->m_pathSetting;}
+        PathSetting& pathSetting(){return this->m_pathSetting;}
 
         void setAppSetting(AppSetting& appSetting)
         {
             this->m_appSetting = appSetting;
         }
-        AppSetting appSetting(){return this->m_appSetting;}
+        AppSetting& appSetting(){return this->m_appSetting;}
 
         //>>>-------------------------------------------------------------------
         // member function
@@ -65,9 +65,9 @@ namespace APP
         //>>>-------------------------------------------------------------------
         // member variant
 
-        QString m_pathSettingPath {""};
-        PathSetting m_pathSetting;
-        AppSetting m_appSetting;
+        QString m_pathSettingPath {""};   // 存放各路径的配置文件路径
+        PathSetting m_pathSetting;        // 路径配置文件中的配置信息
+        AppSetting m_appSetting;          // 软件运行界面的配置信息
 
         //<<<-------------------------------------------------------------------
 

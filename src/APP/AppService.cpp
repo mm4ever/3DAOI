@@ -16,7 +16,11 @@ AppService::AppService()
 
 AppService::~AppService()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -27,8 +31,13 @@ AppService::~AppService()
 
 void AppService::init()
 {
-    this->m_pathSetting.load(this->m_pathSettingPath);
-    this->m_appSetting.load(this->m_pathSetting.appSettingPath());
+    try
+    {
+        this->m_pathSetting.load(this->m_pathSettingPath);
+        this->m_appSetting.load(this->m_pathSetting.appSettingPath());
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Init error!");
+
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

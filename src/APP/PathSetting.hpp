@@ -37,31 +37,31 @@ namespace APP
         {
             this->m_appSettingPath = appSettingPath;
         }
-        QString appSettingPath(){return this->m_appSettingPath;}
+        QString& appSettingPath(){return this->m_appSettingPath;}
 
         void setExportXmlPath(QString exportXmlpath)
         {
             this->m_exportXmlPath = exportXmlpath;
         }
-        QString exportXmlPath(){return this->m_exportXmlPath;}
+        QString& exportXmlPath(){return this->m_exportXmlPath;}
 
         void setDefaultJobFolderPath(QString defaultJobFolderPath)
         {
             this->m_inspectionSettingPath = defaultJobFolderPath;
         }
-        QString defaultJobFolderPath(){return this->m_defaultJobFolderPath;}
+        QString& defaultJobFolderPath(){return this->m_defaultJobFolderPath;}
 
         void setInspectionSettingPath(QString inspectionSettingPath)
         {
             this->m_inspectionSettingPath = inspectionSettingPath;
         }
-        QString inspectionSettingPath(){return this->m_inspectionSettingPath;}
+        QString& inspectionSettingPath(){return this->m_inspectionSettingPath;}
 
-        void setRegistrationInfoPath(QString registrationInfo)
+        void setUserAccountPath(QString userAccountPath)
         {
-            this->m_registrationInfoPath = registrationInfo;
+            this->m_userAccountPath = userAccountPath;
         }
-        QString registrationInfoPath(){return this->m_registrationInfoPath;}
+        QString& userAccountPath(){return this->m_userAccountPath;}
         //>>>-------------------------------------------------------------------
         // member function
 
@@ -84,7 +84,7 @@ namespace APP
         QString m_defaultJobFolderPath {""};    // 默认检测程式的路径
         QString m_inspectionSettingPath {""};   // 设备检测信息的配置文件路径
         QString m_exportXmlPath {""};           // 导出到xml的路径
-        QString m_registrationInfoPath {""};    // 用户注册信息的配置文件路径
+        QString m_userAccountPath {""};         // 用户注册信息的配置文件路径
 
         //<<<-------------------------------------------------------------------
 

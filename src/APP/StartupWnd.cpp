@@ -18,7 +18,11 @@ StartupWnd::StartupWnd()
 
 StartupWnd::~StartupWnd()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -29,8 +33,12 @@ StartupWnd::~StartupWnd()
 
 void StartupWnd::run()
 {
-    cout << "Loading..." <<endl;
-    this_thread::sleep_for(std::chrono::seconds(2));
+    try
+    {
+        cout << "Loading..." <<endl;
+        this_thread::sleep_for(std::chrono::seconds(2));
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Running startup window error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

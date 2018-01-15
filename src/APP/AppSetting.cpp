@@ -22,7 +22,11 @@ AppSetting::AppSetting()
 
 AppSetting::~AppSetting()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -36,21 +40,21 @@ void AppSetting::load(const QString& appPath)
     try
     {
         //>>>-------------------------------------------------------------------
-        // step1
-        if(QFile::exists(appPath))  // 加载配置文件
+        // 加载配置文件
+        if(QFile::exists(appPath))
         {
             QSettings configFile(appPath,QSettings::IniFormat);
 
             //>>>---------------------------------------------------------------
-            // step2.1 加载CompanyName
+            // 加载CompanyName
             this->m_companyName = configFile.value("Company").toString();
 
             //>>>---------------------------------------------------------------
-            // step2.2 加载MachineName
+            // 加载MachineName
             this->m_machineName = configFile.value("Machine").toString();
 
             //>>>---------------------------------------------------------------
-            // step2.3 加载Theme
+            // 加载Theme
             QString theme = configFile.value("Theme").toString();
             if( theme.toUpper().toStdString() == VAR_TO_STR(Theme::BLACK) )
             {
@@ -68,7 +72,7 @@ void AppSetting::load(const QString& appPath)
             }
 
             //>>>---------------------------------------------------------------
-            //step2.4 加载Language
+            // 加载Language
             QString lang = configFile.value("Language").toString();
             if(lang.toUpper().toStdString() == VAR_TO_STR(Lang::CN))
             {
@@ -86,7 +90,7 @@ void AppSetting::load(const QString& appPath)
             }
 
             //>>>---------------------------------------------------------------
-            //step2.5 加载LaneMode
+            // 加载LaneMode
             QString laneMode = configFile.value("LaneMode").toString();
             auto loadLaneMode = laneMode.toUpper().toStdString();
             if( loadLaneMode == VAR_TO_STR(LaneMode::SIMULATOR))

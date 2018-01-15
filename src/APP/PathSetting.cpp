@@ -13,14 +13,18 @@ PathSetting::PathSetting()
         this->m_exportXmlPath = "../data/xml/ExportXml.ini";
         this->m_defaultJobFolderPath = "../data/job/";
         this->m_inspectionSettingPath = "./config/InspectionSetting.ini";
-        this->m_registrationInfoPath = "./config/RegistrationUser.ini";
+        this->m_userAccountPath = "./config/UserAccount.ini";
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Constructor error!");
 }
 
 PathSetting::~PathSetting()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -55,7 +59,7 @@ void PathSetting::load(const QString& path)
 
             //>>>---------------------------------------------------------------
             // step2.5 加载RegistrationInfoPath
-            this->m_registrationInfoPath = configFile.value("RegistrationInfoPath").toString();
+            this->m_userAccountPath = configFile.value("UserAccountPath").toString();
 
         }
         else
@@ -67,7 +71,7 @@ void PathSetting::load(const QString& path)
             configFile.setValue("ExportXmlPath",m_exportXmlPath);
             configFile.setValue("DefaultJobFolderPath",m_defaultJobFolderPath);
             configFile.setValue("InspectionSettingPath",m_inspectionSettingPath);
-            configFile.setValue("RegistrationInfoPath",m_registrationInfoPath);
+            configFile.setValue("UserAccountPath",m_userAccountPath);
         }
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Load config file error!");

@@ -1,6 +1,10 @@
 #ifndef UIMANAGE_HPP
 #define UIMANAGE_HPP
 
+#include <iostream>
+#include <string>
+#include <cstring>
+
 #include "StartupWnd.hpp"
 #include "LoginWnd.hpp"
 #include "MainWnd.hpp"
