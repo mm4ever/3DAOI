@@ -6,6 +6,7 @@
 
 #include <QDir>
 
+#include "DB/SqliteDb.hpp"
 #include "GlobalVariable.hpp"
 #include "CustomException.hpp"
 

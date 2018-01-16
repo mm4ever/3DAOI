@@ -1,6 +1,11 @@
 #include "MainWnd.hpp"
 
+using namespace std;
+
 using namespace APP;
+using namespace Job;
+using namespace SSDK;
+using namespace SSDK::DB;
 
 //>>>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // constructor & destructor
@@ -97,10 +102,10 @@ void MainWnd::scanJobFolder()
             if(!cin)       // 输入不是数字
             {
                 cout << "Error! Not a digit!" << std::endl;
-                cin.clear();
-                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 index = -1;
             }
+            cin.clear();
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
         while( index > list.size() || index < 0);
         //>>>-------------------------------------------------------------------
@@ -109,7 +114,10 @@ void MainWnd::scanJobFolder()
         {
             // 创建新的程式
             QString jobPath {path};
-            jobPath.append("default");
+            string jobName;
+            cout << "Please input job name:";
+            getline(cin,jobName);
+            jobPath.append(QString::fromStdString(jobName));
             createDefaultJob(jobPath);
         }
         else
@@ -142,11 +150,202 @@ void MainWnd::loadJob(const QString& jobPath)
 
 void MainWnd::createDefaultJob(const QString& jobName)
 {
+    SqliteDB sqlite;
     try
     {
+        InspectionData inspectionData = g_pSequence->inspectionManager().inspectionData();
+        // 创建数据库对象，打开传入路径的数据库
+        sqlite.open( jobName.toStdString() );
 
+        if( !sqlite.isOpened() )
+        {
+            THROW_EXCEPTION("数据库打开失败！");
+        }
+        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //1 创建InspectionData表，表中包含字段：Version、LastEditingTime
+        string sqlCreate = "CREATE TABLE InspectionData( "
+                           "Version TEXT, "
+                           "LastEditingTime TEXT );";
+        sqlite.execute( sqlCreate );
+        // 插入各字段对应的数据
+        string sqlInsert = "INSERT INTO InspectionData( "
+                           "Version, LastEditingTime ) "
+                           "VALUES(?,?);";
+        sqlite.execute( sqlInsert, inspectionData.version(),
+                                   inspectionData.lastEditingTime() );
+
+        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //2 创建Board表，表中包含字段：Name、SizeX、SizeY、OriginalX、OriginalY
+        sqlCreate = "CREATE TABLE Board( "
+                    "Name TEXT, "
+                    "SizeX REAL, "
+                    "SizeY REAL, "
+                    "OriginalX REAL, "
+                    "OriginalY REAL );";
+        sqlite.execute( sqlCreate );
+
+        sqlInsert = "INSERT INTO Board( "
+                    "Name, SizeX, SizeY, OriginalX, OriginalY ) "
+                    "VALUES(?,?,?,?,?);";
+        sqlite.execute( sqlInsert, inspectionData.board().name(),
+                                   inspectionData.board().rectangle().width(),
+                                   inspectionData.board().rectangle().height(),
+                                   inspectionData.board().originPoint().posX(),
+                                   inspectionData.board().originPoint().posY() );
+
+        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //3 创建MeasuredObjs表，表中包含字段：ID、Name、CentralX、CentralY、Width、Height、Angle、LibID、IsResultOK
+        sqlCreate = "CREATE TABLE MeasuredObjs( "
+                    "ID INTEGER, "
+                    "Name TEXT, "
+                    "CentralX REAL, "
+                    "CentralY REAL, "
+                    "Width REAL, "
+                    "Height REAL, "
+                    "Angle REAL, "
+                    "LibID INTEGER, "
+                    "IsResultOK INTEGER );";
+        sqlite.execute( sqlCreate );
+
+        sqlInsert = "INSERT INTO MeasuredObjs( "
+                    "ID, Name, CentralX, CentralY, Width, Height, Angle, LibID, IsResultOK ) "
+                    "VALUES(?,?,?,?,?,?,?,?,?);";
+        int objCnt = inspectionData.board().pObjs().size(); // 元件个数
+        int isResultOk = 0; // 检测结果是否OK
+
+        sqlite.prepare( sqlInsert );
+        sqlite.begin();
+        for (int i = 0; i < objCnt; ++i)
+        {
+            // 判断检测结果是否OK，OK为0，NG为1
+            if (true == inspectionData.board().pObjs().at(i)->isResultOk())
+            {
+                isResultOk = 0;
+            }
+            else
+            {
+                isResultOk = 1;
+            }
+            sqlite.execute( sqlInsert, inspectionData.board().pObjs().at(i)->id(),
+                                       inspectionData.board().pObjs().at(i)->name(),
+                                       inspectionData.board().pObjs().at(i)->rectangle().centerPoint().posX(),
+                                       inspectionData.board().pObjs().at(i)->rectangle().centerPoint().posY(),
+                                       inspectionData.board().pObjs().at(i)->rectangle().width(),
+                                       inspectionData.board().pObjs().at(i)->rectangle().height(),
+                                       inspectionData.board().pObjs().at(i)->rectangle().angle(),
+                                       inspectionData.board().pObjs().at(i)->lib().id(),
+                                       isResultOk );
+        }
+        sqlite.commit();
+
+        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //4 创建Library表，表中包含字段：ID、Name
+        sqlCreate = "CREATE TABLE Library( "
+                    "ID INTEGER, "
+                    "Name TEXT );";
+        sqlite.execute( sqlCreate );
+
+        sqlInsert = "INSERT INTO Library( "
+                    "ID, Name) "
+                    "VALUES(?,?);";
+
+        sqlite.prepare( sqlInsert );
+        sqlite.begin();
+        for (int i = 0; i < objCnt; ++i)
+        {
+            sqlite.execute( sqlInsert, inspectionData.board().pObjs().at(i)->lib().id(),
+                                       inspectionData.board().pObjs().at(i)->lib().name() );
+        }
+        sqlite.commit();
+
+        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //5 创建MainItem表，表中包含字段：LibID、ID、ShiftX、ShiftY、Width、Height、Angle、Name、Alg
+        sqlCreate = "CREATE TABLE MainItem( "
+                    "LibID INTEGER, "
+                    "ID INTEGER, "
+                    "ShiftX REAL, "
+                    "ShiftY REAL, "
+                    "Width REAL, "
+                    "Height REAL, "
+                    "Angle REAL, "
+                    "Name TEXT, "
+                    "Alg TEXT );";
+        sqlite.execute( sqlCreate );
+
+        sqlInsert = "INSERT INTO MainItem( "
+                    "LibID, ID, ShiftX, ShiftY, Width, Height, Angle, Name, Alg) "
+                    "VALUES(?,?,?,?,?,?,?,?,?);";
+        string algType = "3D";
+
+        sqlite.prepare( sqlInsert );
+        sqlite.begin();
+        for (int i = 0; i < objCnt; ++i)
+        {
+            sqlite.execute( sqlInsert, inspectionData.board().pObjs().at(i)->lib().mainItem().libId(),
+                                       inspectionData.board().pObjs().at(i)->lib().mainItem().id(),
+                                       inspectionData.board().pObjs().at(i)->lib().mainItem().rectangle().centerPoint().posX(),
+                                       inspectionData.board().pObjs().at(i)->lib().mainItem().rectangle().centerPoint().posY(),
+                                       inspectionData.board().pObjs().at(i)->lib().mainItem().rectangle().width(),
+                                       inspectionData.board().pObjs().at(i)->lib().mainItem().rectangle().height(),
+                                       inspectionData.board().pObjs().at(i)->lib().mainItem().rectangle().angle(),
+                                       inspectionData.board().pObjs().at(i)->lib().mainItem().name(),
+                                       algType );
+        }
+        sqlite.commit();
+
+        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //6 创建SubItem表，表中包含字段：LibID、ID、ShiftX、ShiftY、Width、Height、Angle、Name、Alg、Order
+        sqlCreate = "CREATE TABLE SubItem( "
+                    "LibID INTEGER, "
+                    "ID INTEGER, "
+                    "ShiftX REAL, "
+                    "ShiftY REAL, "
+                    "Width REAL, "
+                    "Height REAL, "
+                    "Angle REAL, "
+                    "Name TEXT, "
+                    "Alg TEXT, "
+                    "'Order' INTEGER );";
+        sqlite.execute( sqlCreate );
+
+        sqlInsert = "INSERT INTO SubItem( "
+                    "LibID, ID, ShiftX, ShiftY, Width, Height, Angle, Name, Alg, 'Order') "
+                    "VALUES(?,?,?,?,?,?,?,?,?,?);";
+        int fiducialMarkCnt = 2; // 基准点设置为2个
+        algType = "2D";
+
+        sqlite.prepare( sqlInsert );
+        sqlite.begin();
+        for (int i = 0; i < fiducialMarkCnt; ++i)
+        {
+            for(list<SubItem>::iterator j = inspectionData.board().pObjs().at(i)->lib().itemList().begin();
+                j != inspectionData.board().pObjs().at(i)->lib().itemList().end(); ++j)
+            {
+                sqlite.execute( sqlInsert, (*j).libId(),
+                                           (*j).id(),
+                                           (*j).rectangle().centerPoint().posX(),
+                                           (*j).rectangle().centerPoint().posY(),
+                                           (*j).rectangle().width(),
+                                           (*j).rectangle().height(),
+                                           (*j).rectangle().angle(),
+                                           (*j).name(),
+                                           algType,
+                                           (*j).order() );
+            }
+        }
+        sqlite.commit();
+
+        sqlite.close();
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Create default job file error!");
+    catch( const CustomException& ex )
+    {
+        if( sqlite.isOpened() )
+        {
+            sqlite.reset();
+            sqlite.close();
+        }
+        THROW_EXCEPTION( ex.what() );
+    }
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
