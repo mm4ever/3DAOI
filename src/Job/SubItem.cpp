@@ -10,6 +10,7 @@ SubItem::SubItem()
     try
     {
         this->m_pAlg = new Alg2D;
+        this->m_itemType = ItemType::SUBITEM;
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("构造函数出错");
 }

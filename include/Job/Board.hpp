@@ -73,9 +73,9 @@ namespace Job
         //>>>-----------------------------------------------------------------------
         // comment variant
 
-        std::string m_name;
-        std::vector<MeasuredObj*> m_pObjs;
-        SSDK::Point m_originPoint;
+        std::string m_name{"\0"};
+        std::vector<MeasuredObj*> m_pObjs;  //board上的检测对象列表
+        SSDK::Point m_originPoint;          //机器原点坐标
         SSDK::Rectangle m_recatangle;
 
         //<<<-----------------------------------------------------------------------

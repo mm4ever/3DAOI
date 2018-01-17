@@ -2,19 +2,12 @@
 #define MEASUREDOBJ_HPP
 
 #include "CustomException.hpp"
-#include "Inspection.hpp"
+#include "IInspection.hpp"
 #include "Rectangle.hpp"
 #include "Library.hpp"
 
 namespace Job
 {
-
-    enum class MeasuredObjType
-    {
-        FIDUCIALMARK,
-        COMPONENT
-    };
-
     /**
      *  @brief MeasuredObj
      *          表示一个检测过的目标的类，存有以下信息：
@@ -34,6 +27,12 @@ namespace Job
     class MeasuredObj
     {
     public:
+
+        enum class MeasuredObjType
+        {
+            FIDUCIALMARK,
+            COMPONENT
+        };
 
         //>>>-----------------------------------------------------------------------
         // constructor & destructor
@@ -85,11 +84,11 @@ namespace Job
         // member variant
 
         int m_id{0};
-        bool m_isResultOk{false};
-        std::string m_name;
+        bool m_isResultOk{false};           //检测元件的检测结果是否为OK
+        std::string m_name{"\0"};
         SSDK::Rectangle m_rectangle;
         Library m_lib;
-        MeasuredObjType m_measuredObjType;
+        MeasuredObjType m_measuredObjType;  //类为检测目标基类，故需要记录检测目标类型
 
         //<<<-----------------------------------------------------------------------
     };

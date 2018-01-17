@@ -7,13 +7,6 @@
 
 namespace SSDK
 {
-
-    enum class ShapeType
-    {
-        CIRCLE,
-        RECTANGLE
-    };
-
     /**
      *  @brief 表示形状的类，存有形状的坐标位置
      *
@@ -24,6 +17,12 @@ namespace SSDK
     class Shape
     {
     public:
+
+        enum class ShapeType
+        {
+            CIRCLE,
+            RECTANGLE
+        };
 
         //>>>-------------------------------------------------------------------
         // constructor & destructor

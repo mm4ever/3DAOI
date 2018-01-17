@@ -29,8 +29,8 @@ bool Alg2D::inspect()
 {
     try
     {
-        double falseProbability = 0.2;
-        return (NumRandom::randomBool(falseProbability));
+        double NGProbability = 0.2;
+        return (NumRandom::randomBool(NGProbability));
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("模拟检测出错");
 }

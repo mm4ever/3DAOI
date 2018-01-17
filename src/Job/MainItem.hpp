@@ -28,7 +28,7 @@ namespace Job
         // constructor & destructor
 
         /**
-        *  @brief   默认构造函数，加入3D检测算法
+        *  @brief   默认构造函数，加入3D检测算法并记录Item类型为MainItem
         *  @param   N/A
         *  @return  N/A
         */
@@ -39,7 +39,7 @@ namespace Job
         *  @param   N/A
         *  @return  N/A
         */
-        ~MainItem();
+        virtual ~MainItem();
 
         //<<<-----------------------------------------------------------------------
     };

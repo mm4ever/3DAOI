@@ -16,9 +16,27 @@ Board::Board()
 
 Board::~Board()
 {
-    for(unsigned i = 0;i < this->m_pObjs.size();++i)
+    try
     {
-        delete this->m_pObjs[i];
+        for(unsigned i = 0;i < this->m_pObjs.size();++i)
+        {
+            if(nullptr != this->m_pObjs[i])
+            {
+                delete this->m_pObjs[i];
+                this->m_pObjs[i] = nullptr;
+            }
+        }
+    }
+    catch(...)
+    {
+        for(unsigned i = 0;i < this->m_pObjs.size();++i)
+        {
+            if(nullptr != this->m_pObjs[i])
+            {
+                delete this->m_pObjs[i];
+                this->m_pObjs[i] = nullptr;
+            }
+        }
     }
 }
 
@@ -39,17 +57,17 @@ void Board::inspect()
 {
     try
     {
-        for(unsigned i = 0 ; i < this->m_pObjs.size() ; ++ i)
+        for(unsigned i = 0 ; i < this->m_pObjs.size() ; ++ i)   //检测所有基准点
         {
-            if(MeasuredObjType::FIDUCIALMARK == this->m_pObjs[i]->measuredObjType())
+            if(MeasuredObj::MeasuredObjType::FIDUCIALMARK == this->m_pObjs[i]->measuredObjType())
             {
                 this->m_pObjs[i]->inspect();
             }
         }
 
-        for(unsigned i = 0 ; i < this->m_pObjs.size() ; ++ i)
+        for(unsigned i = 0 ; i < this->m_pObjs.size() ; ++ i)   //检测所有元件
         {
-            if(MeasuredObjType::COMPONENT == this->m_pObjs[i]->measuredObjType())
+            if(MeasuredObj::MeasuredObjType::COMPONENT == this->m_pObjs[i]->measuredObjType())
             {
                 this->m_pObjs[i]->inspect();
             }

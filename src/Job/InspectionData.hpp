@@ -66,8 +66,8 @@ namespace Job
         //member variant
 
         Board m_board;
-        std::string m_version;
-        std::string m_lastEditingTime;
+        std::string m_version{"\0"};        //检测程式的版本号
+        std::string m_lastEditingTime{"\0"};//最后一次修改程式的时间
     };
 
 }//End of namespace Job

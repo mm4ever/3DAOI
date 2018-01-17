@@ -3,7 +3,7 @@
 
 #include <list>
 
-#include "Inspection.hpp"
+#include "IInspection.hpp"
 #include "CustomException.hpp"
 #include "MainItem.hpp"
 #include "SubItem.hpp"
@@ -17,7 +17,7 @@ namespace Job
      *  @version 1.00 2018-01-05 lynn
      *                note:create it
      */
-    class Library:private Inspection
+    class Library:private IInspection
     {
     public:
 
@@ -68,9 +68,10 @@ namespace Job
         // member variant
 
         int m_id{0};
-        std::string m_name;
-        MainItem m_mainItem;
-        std::list<SubItem> m_itemList;        //TBCL:改名
+        std::string m_name{"\0"};
+        MainItem m_mainItem;            //每个检测库都有且只有一个MainItem
+        std::list<SubItem> m_itemList;  //每个检测库可以用若干个SubItem(包括0)
+        //TBCL:改名
 
         //<<<-----------------------------------------------------------------------
     };
