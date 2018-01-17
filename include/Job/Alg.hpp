@@ -2,16 +2,10 @@
 #define ALG_HPP
 
 #include "CustomException.hpp"
-#include "Inspection.hpp"
+#include "IInspection.hpp"
 
 namespace Job
 {
-
-    enum class AlgType
-    {
-        ALG3D,
-        ALG2D
-    };
     /**
      *  @brief Alg
      *          表示算法的基类，有以下成员变量：
@@ -22,9 +16,15 @@ namespace Job
      *  @version 1.00 2018-01-05 lynn
      *                note:create it
      */
-    class Alg:public Inspection
+    class Alg:public IInspection
     {
     public:
+
+        enum class AlgType
+        {
+            ALG3D,
+            ALG2D
+        };
 
         //>>>-----------------------------------------------------------------------
         // constructor & destructor
@@ -53,7 +53,7 @@ namespace Job
         //>>>-----------------------------------------------------------------------
         // member variant
 
-        AlgType m_algType;
+        AlgType m_algType;      //使用的算法的类型
 
         //<<<-----------------------------------------------------------------------
     };

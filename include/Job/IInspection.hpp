@@ -6,7 +6,7 @@
 namespace Job
 {
 
-    class Inspection
+    class IInspection
     {
     public:
 
@@ -18,19 +18,19 @@ namespace Job
         *  @param   N/A
         *  @return  N/A
         */
-        Inspection();
+        IInspection();
 
         /**
         *  @brief   析构函数
         *  @param   N/A
         *  @return  N/A
         */
-        virtual ~Inspection();
+        virtual ~IInspection();
 
         //>>>-----------------------------------------------------------------------
         // virtual function
 
-        virtual bool inspect();
+        virtual bool inspect()=0;
 
         //<<<-----------------------------------------------------------------------
 

@@ -4,7 +4,7 @@
 #include "CustomException.hpp"
 #include "Alg.hpp"
 #include "Rectangle.hpp"
-#include "Inspection.hpp"
+#include "IInspection.hpp"
 
 namespace Job
 {
@@ -22,9 +22,15 @@ namespace Job
      *  @version 1.00 2018-01-05 lynn
      *                note:create it
      */
-    class Item:public Inspection
+    class Item:public IInspection
     {
     public:
+
+        enum class ItemType
+        {
+            MAINITEM,
+            SUBITEM
+        };
 
         //>>>-----------------------------------------------------------------------
         // constructor & destructor
@@ -52,6 +58,8 @@ namespace Job
         int id() {return this->m_id;}
         void setId(int id){this->m_id = id;}
 
+        ItemType itemType(){return this->m_itemType;}
+
         SSDK::Rectangle& rectangle(){return this->m_rectangle;}
 
         std::string name(){return this->m_name;}
@@ -75,11 +83,12 @@ namespace Job
         //>>>-----------------------------------------------------------------------
         //member variant
 
-        int m_libID{0};
+        int m_libID{0};             //所在检测库的ID号
         int m_id{0};
+        ItemType m_itemType;        //因Item为检测框基类，故需记录Item的类型
         SSDK::Rectangle m_rectangle;
-        std::string m_name;
-        Alg* m_pAlg{nullptr};
+        std::string m_name{"\0"};
+        Alg* m_pAlg{nullptr};       //用于Item的算法
 
         //<<<-----------------------------------------------------------------------
     };

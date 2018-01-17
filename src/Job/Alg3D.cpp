@@ -30,8 +30,8 @@ bool Alg3D::inspect()
 {
     try
     {
-        double falseProbability = 0.4;
-        return (NumRandom::randomBool(falseProbability));
+        double NGProbability = 0.4;
+        return (NumRandom::randomBool(NGProbability));
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("模拟3D检测出错");
 }

@@ -10,13 +10,6 @@
 
 namespace Job
 {
-    //图像的位数,表示将从黑到白的颜色映射到2的ImgBit次方个数字
-    enum class ImgBit
-    {
-        BIT8,
-        BIT16
-    };
-
     /**
      *  @brief  InspectionSetting
      *          存有以下信息：
@@ -31,6 +24,14 @@ namespace Job
     class InspectionSetting
     {
     public:
+
+        //图像的位数,表示将从黑到白的颜色映射到2的ImgBit次方个数字
+        enum class ImgBit
+        {
+            BIT8,
+            BIT16
+        };
+
         //>>>-----------------------------------------------------------------------
         // constructor & deconstructor
 
@@ -75,10 +76,9 @@ namespace Job
         //>>>-----------------------------------------------------------------------
         // member function
 
-        //定义图片的宽度,高度及图像的位数(相机为12M相机,图像位数分别为8位和16位)
-        int m_imgWidth{0};
-        int m_imgHeight{0};
-        ImgBit m_imgBit;
+        int m_imgWidth{0};  //图像的宽（单位：像素）
+        int m_imgHeight{0}; //图像的高（单位：像素)
+        ImgBit m_imgBit;    //图像的位数,表示将从黑到白的颜色映射到2的ImgBit次方个数字
 
         //<<<-----------------------------------------------------------------------
     };

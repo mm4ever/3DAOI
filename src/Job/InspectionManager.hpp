@@ -50,7 +50,7 @@ namespace Job
         // member variant
 
         InspectionData m_inspectionData;
-        InspectionSetting m_inspectionSetting;
+        InspectionSetting m_inspectionSetting;  //检测的设置
 
         //<<<-----------------------------------------------------------------------
     };

@@ -10,6 +10,7 @@ MainItem::MainItem()
     try
     {
         this->m_pAlg = new Alg3D;
+        this->m_itemType = ItemType::MAINITEM;
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("构造函数出错");
 }

@@ -25,7 +25,7 @@ namespace SSDK
 
         NumRandom();
 
-       virtual ~NumRandom();
+        virtual ~NumRandom();
 
         //>>>-------------------------------------------------------------------
         // member function
