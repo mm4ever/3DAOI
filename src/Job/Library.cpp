@@ -36,9 +36,9 @@ bool Library::inspect()
             return false;
         }
 
-        std::list<SubItem>::iterator iterator = this->m_itemList.begin();
+        std::list<SubItem>::iterator iterator = this->m_subItems.begin();
 
-        while (iterator != this->m_itemList.end())  //调用每个检测item的检测函数
+        while (iterator != this->m_subItems.end())  //调用每个检测item的检测函数
         {
             if( false == (*iterator).inspect() )
             {

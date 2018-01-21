@@ -11,7 +11,6 @@
 
 namespace Job
 {
-
     /**
      *  @brief Board
      *          表示基板的类，存有以下信息：

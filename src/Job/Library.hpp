@@ -38,7 +38,7 @@ namespace Job
 
         MainItem& mainItem(){return this->m_mainItem;}
 
-        std::list<SubItem>& itemList(){return this->m_itemList;}
+        std::list<SubItem>& subItems(){return this->m_subItems;}
 
         //>>>-----------------------------------------------------------------------
         // override function
@@ -58,10 +58,9 @@ namespace Job
         // member variant
 
         int m_id{0};
-        std::string m_name{"\0"};
+        std::string m_name{""};         //library的名字
         MainItem m_mainItem;            //每个检测库都有且只有一个MainItem
-        std::list<SubItem> m_itemList;  //每个检测库可以用若干个SubItem(包括0)
-        //TBCL:改名
+        std::list<SubItem> m_subItems;  //每个检测库可以用若干个SubItem(包括0)
 
         //<<<-----------------------------------------------------------------------
     };

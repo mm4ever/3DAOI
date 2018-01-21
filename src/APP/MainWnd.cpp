@@ -38,32 +38,21 @@ void MainWnd::run()
 {
     try
     {
-        srand(time(NULL));
         // 扫描检测程式
         this->scanJobFolder();
 
         // 加载完程式,检测
         cout << "Press \"y\" to inspect:";
         char inspectValue;
-        string xmlFileName{""};
-        QString xmlPath{""};
         cin >> inspectValue;
-        if( 'y' == inspectValue || 'Y' == inspectValue )
+        while ( 'y' == inspectValue || 'Y' == inspectValue )
         {
-            do
-            {
-                this->inspectClick();
-                xmlFileName = APP::g_pSequence->inspectionManager().inspectionData().board().name()
-                               + "_" + DataGenerator::getCurrentTime()+".xml";
-                xmlPath = APP::g_pAppService->pathSetting().exportXmlPath() +
-                                   xmlFileName.c_str();
-                APP::g_pSequence->inspectionManager().inspectionData().writeInspectionDataToXml(
-                xmlPath);
-                cout << "Press \"y\" to inspect again:";
-                cin.clear();
-                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                cin >> inspectValue;
-            }while ( 'y' == inspectValue || 'Y' == inspectValue );
+            this->inspectClick();
+            this->writeNGToXml();
+            cout << "Press \"y\" to inspect again:";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cin >> inspectValue;
         }
         cout << "Quit ..." << endl;
     }
@@ -76,55 +65,50 @@ void MainWnd::scanJobFolder()
     try
     {
         //>>>-------------------------------------------------------------------
-        // 1.判断文件夹是否存在，不存在则创建
+        // 1.判断文件夹是否存在
         QDir dir(path);
         if(!dir.exists())
         {
             std::cout << path.toStdString() << " is not exists!"<< std::endl;
-            if( !dir.mkpath(path) )    // 创建失败
-            {
-                // 创建配置文件失败,抛出异常
-                THROW_EXCEPTION("No job path and create error!");
-            }
+            THROW_EXCEPTION("No job path!");
         }
         //>>>-------------------------------------------------------------------
         // 2.扫描程式文件
-        QStringList filters;    // 创建过滤器列表，过滤xml、txt为后缀的文件
-        filters << "*[^xml|^txt]";
-        dir.setNameFilters(filters);
 
         dir.setFilter(QDir::Files);
         QFileInfoList list = dir.entryInfoList();
 
-
-        // 先显示"创建程式"的提示信息,再将扫描的文件打印
+        // 先显示"创建程式"的提示信息,再将扫描到的文件打印
         cout << "0:Create default job" << endl;
         for (int i = 0; i < list.size(); ++i)
         {
             cout<<qPrintable(QString("%1:%2\n").arg(i+1).arg(list.at(i).fileName()));
         }
         int index {-1};
-        do  // 选择创建程式或需要加载的程式文件
+        cout << "\nChoice 0 to create job other to load job:";
+        // 创建程式或选择需要加载的程式文件
+        while( index > list.size() || index < 0)
         {
-            cout << "\nChoice number to create or load job:";
             cin >> index;
-            if(!cin)       // 输入不是数字
+            if(!cin)            // 输入不是数字
             {
-                cout << "Error! Not a digit!" << std::endl;
+                cout<<"Not a digit. Please input 0 to "<<list.size()<<":";
                 index = -1;
             }
-            cin.clear();
-            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            else if( index > list.size() || index < 0 ) // 输入不在范围内
+            {
+                cout<<"Out of range! Please input 0 to "<<list.size() <<":";
+            }
+            cin.clear();        // 清空键盘输入的缓存
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
-        while( index > list.size() || index < 0);
         //>>>-------------------------------------------------------------------
         // 3.创建或加载程式
 
-        if( 0 == index )                // 创建新的程式
+        if( 0 == index )        // 创建新的程式
         {
-            // 在内存中生成默认的检测数据
-            DataGenerator datagenerator;
-            datagenerator.generateInspectionData(g_pSequence->inspectionManager().inspectionData());
+            DataGenerator dataGenerator;
+            dataGenerator.generateInspectionData(g_pSequence->inspectionManager().inspectionData());
 
             QString jobPath {path};
             string jobName;
@@ -133,9 +117,8 @@ void MainWnd::scanJobFolder()
             jobPath.append(QString::fromStdString(jobName));
             createDefaultJob(jobPath);
         }
-        else
+        else                    // 加载用户选择的程式
         {
-            // 加载用户选择的程式
             QString jobPath = list.at(index-1).filePath();
             g_pSequence->inspectionManager().loadInspectionData(jobPath);
         }
@@ -150,6 +133,21 @@ void MainWnd::inspectClick()
         APP::g_pSequence->inspectCycle();
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Inspect click error!");
+}
+
+void MainWnd::writeNGToXml()
+{
+    string xmlFileName{""};     // xml文件名
+    QString xmlPath{""};        // xml文件路径
+
+    xmlFileName = APP::g_pSequence->inspectionManager().inspectionData().board()
+            .name() + "_" + DataGenerator::getCurrentTime()+".xml";
+    xmlPath = APP::g_pAppService->pathSetting().exportXmlPath() +
+            xmlFileName.c_str();
+
+    // 将NG的元件写入到xml文件中
+    APP::g_pSequence->inspectionManager().inspectionData().
+            writeInspectionDataToXml( xmlPath );
 }
 
 void MainWnd::loadJob(const QString& jobPath)
@@ -280,8 +278,8 @@ void MainWnd::loadJob(const QString& jobPath)
                     // 在Library容器中找到与数据表中相应的库的ID号，然后将数据表中的信息存放到SubItem容器中
                     if ( (*i)->id() == boost::get<int>(sqlite.columnValue(0)) )
                     {
-                        (*i)->itemList().push_back(SubItem());
-                        SubItem& item = (*i)->itemList().back();
+                        (*i)->subItems().push_back(SubItem());
+                        SubItem& item = (*i)->subItems().back();
                         if ( VAR_TO_STR(Alg::AlgType::ALG2D) == boost::get<string>(sqlite.columnValue(8)) )
                         {
                             item.setPAlg( new Alg2D() );
@@ -563,8 +561,8 @@ void MainWnd::createDefaultJob(const QString& jobName)
         sqlite.begin();
         for (size_t i = 0; i < g_pSequence->inspectionManager().inspectionData().board().pLibs().size(); ++i)
         {
-            for(list<SubItem>::iterator j = g_pSequence->inspectionManager().inspectionData().board().pLibs()[i]->itemList().begin();
-                j != g_pSequence->inspectionManager().inspectionData().board().pLibs()[i]->itemList().end(); ++j)
+            for(list<SubItem>::iterator j = g_pSequence->inspectionManager().inspectionData().board().pLibs()[i]->subItems().begin();
+                j != g_pSequence->inspectionManager().inspectionData().board().pLibs()[i]->subItems().end(); ++j)
             {
                 if (Alg::AlgType::ALG2D == (*j).pAlg()->algType())
                 {

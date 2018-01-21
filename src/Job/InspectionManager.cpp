@@ -168,8 +168,8 @@ void InspectionManager::loadInspectionData(QString &jobPath)
                     // 在Library容器中找到与数据表中相应的库的ID号，然后将数据表中的信息存放到SubItem容器中
                     if ( (*i)->id() == boost::get<int>(sqlite.columnValue(0)) )
                     {
-                        (*i)->itemList().push_back(SubItem());
-                        SubItem& item = (*i)->itemList().back();
+                        (*i)->subItems().push_back(SubItem());
+                        SubItem& item = (*i)->subItems().back();
                         if ( VAR_TO_STR(Alg::AlgType::ALG2D) == boost::get<string>(sqlite.columnValue(8)) )
                         {
                             item.setPAlg( new Alg2D() );

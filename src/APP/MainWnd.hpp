@@ -66,6 +66,14 @@ namespace APP
         void inspectClick();
 
         /**
+         * @brief writeNGToXml
+         *      将NG的元件信息写入xml文件中
+         * @param N/A
+         * @return N/A
+         */
+        void writeNGToXml();
+
+        /**
          * @brief loadJob
          *      加载程式文件
          * @param jobPath

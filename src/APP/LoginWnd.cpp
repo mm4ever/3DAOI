@@ -35,40 +35,45 @@ void LoginWnd::run()
 {
     try
     {
-        // 用户选择游客登录、注册账户、登录账户
-        int runningType;
-        do
+        // 用户选择注册账户、登录账户或游客登录
+        int runningType {1};          // 1为注册账户,2为登录账户,3为游客登录
+        while ( 1 == runningType )    // 选择注册账户后需要继续选择登录方式
         {
-            cout << "\n1:register account" << endl
-                 << "2:login account" << endl
-                 << "3:login as a tourist" << endl
+            cout << "\n"
+                 << "1:register account\n"
+                 << "2:login account\n"
+                 << "3:login as a tourist\n"
                  << "Choice number:";
-            cin >> runningType;
-            while(!cin)                 // 输入不是数字
+            runningType = -1;         // 输入的值不在范围内,循环输入直至输入正确
+            while( runningType > 4 || runningType < 0 )
             {
-                cout << "Not a digit!Try again:";
-                cin.clear();            // 清空输入的缓存
+                cin >> runningType;   // 输入登录模式的序号
+                if(!cin)              // 输入不是数字
+                {
+                    cout << "Not a digit! Please input 1 to 3:";
+                    runningType = -1;
+                }
+                else if( runningType > 3 || runningType < 0 ) // 输入不在范围内
+                {
+                    cout << "Out of range! Please input 1 to 3:";
+                    runningType = -1;
+                }
+                cin.clear();          // 清空输入的缓存
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                cin >> runningType;     // 输入登录模式的序号
             }
-            if( 1 == runningType )      // 输入1为注册账户
+            if( 1 == runningType )    // 输入1为注册账户
             {
-                cin.clear();            // 清空输入的缓存
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 this->registerAccount();
             }
-            else if( 2 == runningType ) // 输入2为登录
+            else if(2 == runningType) // 输入2为登录
             {
-                cin.clear();            // 清空输入的缓存
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 this->login();
             }
-            else                        // 输入其他为访客登录
+            else                      // 输入3为访客登录
             {
-                cout << "Login as a tourist." << endl;
-                cout << "\n";
+                cout << "Login as a tourist.\n\n";
             }
-        }while ( 1 == runningType );    // 注册完账户选择登录
+        }
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Running login window error!");
 }
@@ -96,7 +101,7 @@ void LoginWnd::registerAccount()
             if(firstPasswd == secondPasswd)
             {
                 // 两次密码输入正确,将账户信息写入配置文件中
-                cout << "Two passwd is same,Register success!" << endl;
+                cout << "Two passwd is same,Register success!\n";
                 config.setValue( QString::fromStdString(userName),
                                  QString::fromStdString(firstPasswd) );
                 break;
@@ -104,7 +109,9 @@ void LoginWnd::registerAccount()
             else
             {
                 // 两次密码不同,请重新输入
-                cout << "Two passwd is different,Try again!" << endl;
+                cout << "Two passwd is different,Try again!\n";
+                cout << "Please input your name:";
+                getline(cin,userName);          // 再次输入用户名
             }
         }
     }
@@ -130,24 +137,24 @@ void LoginWnd::login()
 
             // 判断输入的账户是否存在ini文件中
             inputName = config.value(QString::fromStdString(name)).toInt();
-            if( 0 != inputName )                            // 用户名是否正确
+            if( 0 != inputName )                            // 用户名正确
             {
-                std::cout << "Please input password:";
+                cout << "Please input password:";
                 getline(cin,passwd);                        // 获得密码输入
                 auto inputPasswd = config.value(QString::fromStdString(name)).toString();
                 if ( inputPasswd.toStdString() == passwd )  // 判断密码是否正确
                 {
-                    cout << "Longin successful!\n" << endl; // 登录成功
+                    cout << "Longin successful!\n\n";       // 登录成功
                     break;
                 }
                 else
                 {
-                    cout << "Invalid password! Try again!" << endl; // 密码错误
+                    cout << "Invalid password! Try again!\n"; // 密码错误
                 }
             }
-            else
+            else                                            // 用户名错误
             {
-                cout << "Invalid user! Try again!" << endl; // 账户错误
+                cout << "Invalid user! Try again!\n";       // 没有该账户
             }
         }
     }

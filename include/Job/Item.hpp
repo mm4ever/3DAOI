@@ -26,10 +26,14 @@ namespace Job
     {
     public:
 
+        /**
+         *  @brief 库中检测框类型
+         *
+         */
         enum class ItemType
         {
-            MAINITEM,
-            SUBITEM
+            MAINITEM,       //主检测框,每个检测库最少包含一个主检测框来定位检测对象
+            SUBITEM         //辅检测框,每个检测库可以有若干个
         };
 
         //>>>-----------------------------------------------------------------------
@@ -83,7 +87,7 @@ namespace Job
         int m_id{0};
         ItemType m_itemType;        //因Item为检测框基类，故需记录Item的类型
         SSDK::Rectangle m_rectangle;//与item位置、大小贴合的矩形
-        std::string m_name{"\0"};
+        std::string m_name{""};
         Alg* m_pAlg{nullptr};       //用于Item的算法
 
         //<<<-----------------------------------------------------------------------

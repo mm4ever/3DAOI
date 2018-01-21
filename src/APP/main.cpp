@@ -31,6 +31,10 @@ int main()
         UIManager uiManager;
         uiManager.run();
 
+        delete APP::g_pAppService;
+        APP::g_pAppService = nullptr;
+        delete APP::g_pSequence;
+        APP::g_pSequence = nullptr;
     }
     CATCH_AND_PRINT_EXCEPTION();
 
