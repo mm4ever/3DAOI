@@ -49,3 +49,5 @@ mkdir -p debug/config include/Job include/SSDK lib/debug
     - 依次点击Projects->BuildSteps->AddBuildStep->CustomProcessStep
     - 将Command修改为:./debug_build.sh
 3. 配置完成
+
+
