@@ -60,11 +60,6 @@ namespace SSDK
          */
         explicit CustomException(std::string & message);
 
-        /**
-         *  @brief   类的析构函数，占无内容
-         *  @param   N/A
-         *  @return  N/A
-         */
         virtual~CustomException();
 
         //>>>-------------------------------------------------------------------

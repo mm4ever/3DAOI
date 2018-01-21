@@ -24,11 +24,6 @@ namespace SSDK
         //>>>-------------------------------------------------------------------
         // constructor & destructor
 
-        /**
-         *  @brief   默认构造函数
-         *  @param   N/A
-         *  @return  N/A
-         */
         Point();
 
         /**
@@ -38,11 +33,6 @@ namespace SSDK
          */
         Point(double posX,double posY);
 
-        /**
-         *  @brief   析构函数
-         *  @param   N/A
-         *  @return  N/A
-         */
         virtual ~Point();
 
         //>>>-------------------------------------------------------------------

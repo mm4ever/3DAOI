@@ -29,17 +29,31 @@ namespace Job
         // constructor & destructor
 
         /**
-        *  @brief   默认构造函数
+        *  @brief   默认构造函数,将检测的目标类型设置为component
         *  @param   N/A
         *  @return  N/A
         */
         Component();
 
         /**
-        *  @brief   析构函数
-        *  @param   N/A
-        *  @return  N/A
+        *  @brief 带参构造函数，设置成员变量,并将检测的目标类型设置为component
+        *  @param id：元件序号
+        *         name：元件名
+        *         centralX：元件中心点x坐标
+        *       　centralY：元件中心点y坐标
+        *       　angle：元件角度
+        *         width：元件宽
+        *         height：元件长
+        *  @return N/A
         */
+        Component(int id,
+                  std::string name,
+                  double centralX,
+                  double centralY,
+                  double angle,
+                  double width,
+                  double height);
+
         virtual~ Component();
 
         //>>>-----------------------------------------------------------------------

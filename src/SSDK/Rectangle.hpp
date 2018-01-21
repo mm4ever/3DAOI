@@ -26,7 +26,7 @@ namespace SSDK
 
         /**
          *  @brief  Rectangle
-         *      默认构造函数
+         *      默认构造函数,将形状类型设置为矩形
          *  @param   N/A
          *  @return  N/A
          */
@@ -34,7 +34,7 @@ namespace SSDK
 
         /**
          *  @brief  Rectangle
-         *      带参构造函数
+         *      带参构造函数，设置相关成员变量并将形状类型设置为矩形
          *  @param
          *      xPos: 设置rectangle的x坐标
          *      yPos: 设置rectangle的y坐标
@@ -49,11 +49,6 @@ namespace SSDK
                    double height,
                    double angle );
 
-        /**
-         *  @brief   析构函数
-         *  @param   N/A
-         *  @return  N/A
-         */
         virtual ~Rectangle();
 
         //>>>-------------------------------------------------------------------

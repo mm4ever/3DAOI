@@ -13,18 +13,8 @@ namespace Job
         //>>>-----------------------------------------------------------------------
         // constructor & destructor
 
-        /**
-        *  @brief   默认构造函数
-        *  @param   N/A
-        *  @return  N/A
-        */
         IInspection();
 
-        /**
-        *  @brief   析构函数
-        *  @param   N/A
-        *  @return  N/A
-        */
         virtual ~IInspection();
 
         //>>>-----------------------------------------------------------------------

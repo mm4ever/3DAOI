@@ -22,14 +22,14 @@ namespace SSDK
         // constructor & destructor
 
         /**
-         *  @brief   默认构造函数
+         *  @brief   默认构造函数，将形状类型设置为圆形
          *  @param   N/A
          *  @return  N/A
          */
         Circle();
 
         /**
-        *  @brief   用给定位置信息、半径进行构造
+        *  @brief   用给定位置信息、半径进行构造并将形状类型设置为圆形
         *  @param   radius:要设置的半径
         *           posX:要设置的x坐标
         *           posY:要设置的y坐标
@@ -37,11 +37,6 @@ namespace SSDK
         */
         Circle( double radius,double posX,double posY );
 
-        /**
-         *  @brief   默认析构函数
-         *  @param   N/A
-         *  @return  N/A
-         */
         virtual ~Circle();
 
         //>>>-------------------------------------------------------------------

@@ -30,11 +30,6 @@ namespace Job
         //>>>-----------------------------------------------------------------------
         // constructor & destructor
 
-        /**
-        *  @brief   默认构造函数
-        *  @param   N/A
-        *  @return  N/A
-        */
         Board();
 
         /**
@@ -54,6 +49,8 @@ namespace Job
         SSDK::Point& originPoint(){return this->m_originPoint;}
 
         SSDK::Rectangle& rectangle(){return this->m_recatangle;}
+
+        std::vector<Library*> &pLibs() {return this->m_pLibs;}
 
         //>>>-----------------------------------------------------------------------
         // member function
@@ -75,8 +72,9 @@ namespace Job
 
         std::string m_name{"\0"};
         std::vector<MeasuredObj*> m_pObjs;  //board上的检测对象列表
-        SSDK::Point m_originPoint;          //机器原点坐标
-        SSDK::Rectangle m_recatangle;
+        SSDK::Point m_originPoint;          //机器原点坐标，检测时以这一点作为board的原点
+        SSDK::Rectangle m_recatangle;       //和board大小、位置信息贴合的矩形
+        std::vector<Library *> m_pLibs;     //board上所有检测目标用到的库
 
         //<<<-----------------------------------------------------------------------
     };

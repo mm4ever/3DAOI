@@ -1,6 +1,7 @@
 #include "Board.hpp"
 
 using namespace Job;
+using namespace std;
 
 //>>>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // constructor & destructor
@@ -18,23 +19,45 @@ Board::~Board()
 {
     try
     {
-        for(unsigned i = 0;i < this->m_pObjs.size();++i)
+        int measuredObjCnt = this->m_pObjs.size();
+        for (int i = 0; i < measuredObjCnt ; ++i)//遍历释放所有存放元件的空间
         {
-            if(nullptr != this->m_pObjs[i])
+            if (nullptr != this->m_pObjs[i])
             {
                 delete this->m_pObjs[i];
                 this->m_pObjs[i] = nullptr;
             }
         }
+
+        int libraryCnt = this->m_pLibs.size();
+        for (int i = 0 ; i < libraryCnt ; ++i)  //遍历释放所有存放库的空间
+        {
+            if (nullptr != this->m_pLibs[i])
+            {
+                delete this->m_pLibs[i];
+                this->m_pLibs[i] = nullptr;
+            }
+        }
     }
     catch(...)
     {
-        for(unsigned i = 0;i < this->m_pObjs.size();++i)
+        int measuredObjCnt = this->m_pObjs.size();
+        for (int i = 0; i < measuredObjCnt ; ++i)//遍历释放所有存放元件的空间
         {
-            if(nullptr != this->m_pObjs[i])
+            if (nullptr != this->m_pObjs[i])
             {
                 delete this->m_pObjs[i];
                 this->m_pObjs[i] = nullptr;
+            }
+        }
+
+        int libraryCnt = this->m_pLibs.size();
+        for (int i = 0 ; i < libraryCnt ; ++i)  //遍历释放所有存放库的空间
+        {
+            if (nullptr != this->m_pLibs[i])
+            {
+                delete this->m_pLibs[i];
+                this->m_pLibs[i] = nullptr;
             }
         }
     }
@@ -57,7 +80,8 @@ void Board::inspect()
 {
     try
     {
-        for(unsigned i = 0 ; i < this->m_pObjs.size() ; ++ i)   //检测所有基准点
+        int objCnt = this->m_pObjs.size();
+        for(unsigned i = 0 ; i < objCnt ; ++ i)   //检测所有基准点
         {
             if(MeasuredObj::MeasuredObjType::FIDUCIALMARK == this->m_pObjs[i]->measuredObjType())
             {
@@ -65,7 +89,7 @@ void Board::inspect()
             }
         }
 
-        for(unsigned i = 0 ; i < this->m_pObjs.size() ; ++ i)   //检测所有元件
+        for(unsigned i = 0 ; i < objCnt ; ++ i)   //检测所有元件
         {
             if(MeasuredObj::MeasuredObjType::COMPONENT == this->m_pObjs[i]->measuredObjType())
             {

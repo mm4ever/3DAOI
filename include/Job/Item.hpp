@@ -35,15 +35,10 @@ namespace Job
         //>>>-----------------------------------------------------------------------
         // constructor & destructor
 
-        /**
-        *  @brief   默认构造函数
-        *  @param   N/A
-        *  @return  N/A
-        */
         Item();
 
         /**
-        *  @brief   析构函数
+        *  @brief   析构函数,释放用于存放算法的空间
         *  @param   N/A
         *  @return  N/A
         */
@@ -62,9 +57,10 @@ namespace Job
 
         SSDK::Rectangle& rectangle(){return this->m_rectangle;}
 
-        std::string name(){return this->m_name;}
+        std::string &name(){return this->m_name;}
 
         Alg* pAlg() {return this->m_pAlg;}
+        void setPAlg(Alg *pAlg) {this->m_pAlg = pAlg;}
 
         //>>>-----------------------------------------------------------------------
         //override function
@@ -86,7 +82,7 @@ namespace Job
         int m_libID{0};             //所在检测库的ID号
         int m_id{0};
         ItemType m_itemType;        //因Item为检测框基类，故需记录Item的类型
-        SSDK::Rectangle m_rectangle;
+        SSDK::Rectangle m_rectangle;//与item位置、大小贴合的矩形
         std::string m_name{"\0"};
         Alg* m_pAlg{nullptr};       //用于Item的算法
 
