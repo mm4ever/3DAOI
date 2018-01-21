@@ -21,6 +21,10 @@
 /include/SSDK<br>
 /lib<br>
 /lib/debug<br>
+/lib/release<br>
+/data<br>
+/data/job<br>
+/data/xml<br>
 >LinuxTerminal中使用以下命令直接创建:<br>
 mkdir -p debug/config include/Job include/SSDK lib/debug
 
