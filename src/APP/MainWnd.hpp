@@ -9,6 +9,10 @@
 #include "DB/SqliteDb.hpp"
 #include "GlobalVariable.hpp"
 #include "CustomException.hpp"
+#include "FiducialMark.hpp"
+#include "Component.hpp"
+#include "DataGenerator.hpp"
+#include "MeasuredObj.hpp"
 
 namespace APP
 {

@@ -24,18 +24,8 @@ namespace Job
         //>>>-----------------------------------------------------------------------
         // constructor & destructor
 
-        /**
-        *  @brief   默认构造函数
-        *  @param   N/A
-        *  @return  N/A
-        */
         InspectionData();
 
-        /**
-        *  @brief   析构函数
-        *  @param   N/A
-        *  @return  N/A
-        */
         virtual ~InspectionData();
 
         //>>>-----------------------------------------------------------------------
@@ -65,7 +55,7 @@ namespace Job
         //>>>-----------------------------------------------------------------------
         //member variant
 
-        Board m_board;
+        Board m_board;                      //与检测数据对应的检测的基板
         std::string m_version{"\0"};        //检测程式的版本号
         std::string m_lastEditingTime{"\0"};//最后一次修改程式的时间
     };

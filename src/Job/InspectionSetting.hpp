@@ -35,18 +35,8 @@ namespace Job
         //>>>-----------------------------------------------------------------------
         // constructor & deconstructor
 
-        /**
-        *  @brief   默认构造函数
-        *  @param   N/A
-        *  @return  N/A
-        */
         InspectionSetting();
 
-        /**
-        *  @brief   析构函数
-        *  @param   N/A
-        *  @return  N/A
-        */
         virtual ~InspectionSetting();
 
         //>>>-----------------------------------------------------------------------

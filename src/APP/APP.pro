@@ -12,7 +12,9 @@ SOURCES += \
     Sequence.cpp \
     StartupWnd.cpp \
     UIManager.cpp \
-    GlobalVariable.cpp
+    GlobalVariable.cpp \
+    DataGenerator.cpp \
+    DataGeneratorSetting.cpp
 
 HEADERS += \
     AppService.hpp \
@@ -23,7 +25,9 @@ HEADERS += \
     Sequence.hpp \
     StartupWnd.hpp \
     UIManager.hpp \
-    GlobalVariable.hpp
+    GlobalVariable.hpp \
+    DataGenerator.hpp \
+    DataGeneratorSetting.hpp
 
 INCLUDEPATH += $$PWD/../../include/sqlite
 INCLUDEPATH += $$PWD/../../include

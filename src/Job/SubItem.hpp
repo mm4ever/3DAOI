@@ -29,17 +29,12 @@ namespace Job
         // constructor & destructor
 
         /**
-        *  @brief   默认构造函数，加入2D检测算法并记录Item的类型为SubItem
+        *  @brief   默认构造函数，记录Item的类型为SubItem
         *  @param   N/A
         *  @return  N/A
         */
         SubItem();
 
-        /**
-        *  @brief   析构函数,释放用于存放算法的空间
-        *  @param   N/A
-        *  @return  N/A
-        */
         virtual ~SubItem();
 
         //>>>-----------------------------------------------------------------------
@@ -54,7 +49,7 @@ namespace Job
         //>>>-----------------------------------------------------------------------
         // member variant
 
-        int m_order{0};     //检测顺序
+        int m_order{0};     //检测时的顺序
 
         //<<<-----------------------------------------------------------------------
     };

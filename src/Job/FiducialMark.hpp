@@ -36,10 +36,24 @@ namespace Job
         FiducialMark();
 
         /**
-        *  @brief   析构函数
-        *  @param   N/A
+        *  @brief 带参构造函数，设置成员变量，并将检测目标的类型设置为FiducialMark
+        *  @param id:测量目标序号
+        *         name：元件名
+        *         centerX：基准点的中心点x坐标
+        *       　centerY：基准点的中心点y坐标
+        *         width：基准点宽
+        *       　height：基准点高
+        *         angle：基准点角度
         *  @return  N/A
         */
+        FiducialMark(int id,
+                     std::string name,
+                     double centerX,
+                     double centerY,
+                     double width,
+                     double height,
+                     double angle);
+
         virtual ~FiducialMark();
 
         //>>>-----------------------------------------------------------------------

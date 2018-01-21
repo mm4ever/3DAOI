@@ -30,25 +30,15 @@ namespace Job
 
         enum class MeasuredObjType
         {
-            FIDUCIALMARK,
-            COMPONENT
+            FIDUCIALMARK,       //基准点，每个基板上最少有两个，用于定位基板
+            COMPONENT           //元件，有很多种类型，统一归类为元件
         };
 
         //>>>-----------------------------------------------------------------------
         // constructor & destructor
 
-        /**
-        *  @brief   默认构造函数
-        *  @param   N/A
-        *  @return  N/A
-        */
         MeasuredObj();
 
-        /**
-        *  @brief   析构函数
-        *  @param   N/A
-        *  @return  N/A
-        */
         virtual ~MeasuredObj();
 
         //>>>-----------------------------------------------------------------------
@@ -63,7 +53,8 @@ namespace Job
 
         SSDK::Rectangle& rectangle(){return this->m_rectangle;}
 
-        Library& lib(){return this->m_lib;}
+        Library *pLib(){return this->m_pLib;}
+        void setPLib(Library *pLib) {this->m_pLib = pLib;}
 
         MeasuredObjType measuredObjType() {return this->m_measuredObjType;}
 
@@ -75,7 +66,7 @@ namespace Job
         *  @param   N/A
         *  @return  N/A
         */
-        virtual void inspect();
+        virtual void inspect()=0;
 
 
     protected:
@@ -84,10 +75,10 @@ namespace Job
         // member variant
 
         int m_id{0};
-        bool m_isResultOk{false};           //检测元件的检测结果是否为OK
+        bool m_isResultOk{false};           //检测目标的检测结果是否为OK
         std::string m_name{"\0"};
-        SSDK::Rectangle m_rectangle;
-        Library m_lib;
+        SSDK::Rectangle m_rectangle;        //与检测目标位置、大小贴合的矩形
+        Library* m_pLib{nullptr};           //检测时所用的库
         MeasuredObjType m_measuredObjType;  //类为检测目标基类，故需要记录检测目标类型
 
         //<<<-----------------------------------------------------------------------

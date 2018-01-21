@@ -29,7 +29,7 @@ Rectangle::Rectangle( double xPos,
         this->centerPoint().setPosY(yPos);
         this->m_width = width;
         this->m_height = height;
-        this->m_angle = angle;          //2017.12.02 bob 添加成员变量rectangle的角度
+        this->m_angle = angle;
         this->m_shapeType = ShapeType::RECTANGLE;
     }
     catch(...)

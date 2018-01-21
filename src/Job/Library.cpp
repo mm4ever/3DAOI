@@ -2,6 +2,8 @@
 
 using namespace Job;
 
+using namespace std;
+
 //>>>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // constructor & destructor
 
@@ -34,14 +36,15 @@ bool Library::inspect()
             return false;
         }
 
-        std::list<SubItem>::iterator it = this->m_itemList.begin();
+        std::list<SubItem>::iterator iterator = this->m_itemList.begin();
 
-        while (it != this->m_itemList.end())
+        while (iterator != this->m_itemList.end())  //调用每个检测item的检测函数
         {
-            if( false == (*it).inspect() )
+            if( false == (*iterator).inspect() )
             {
                 return false;
             }
+            ++iterator;
         }
 
         return true;

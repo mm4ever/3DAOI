@@ -28,17 +28,12 @@ namespace Job
         // constructor & destructor
 
         /**
-        *  @brief   默认构造函数，加入3D检测算法并记录Item类型为MainItem
+        *  @brief   默认构造函数，记录Item类型为MainItem
         *  @param   N/A
         *  @return  N/A
         */
         MainItem();
 
-        /**
-        *  @brief   析构函数,释放用于存放算法的空间
-        *  @param   N/A
-        *  @return  N/A
-        */
         virtual ~MainItem();
 
         //<<<-----------------------------------------------------------------------
