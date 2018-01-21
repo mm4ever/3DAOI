@@ -11,10 +11,7 @@ Rectangle::Rectangle()
     {
         this->m_shapeType = ShapeType::RECTANGLE;
     }
-    catch(...)
-    {
-        THROW_EXCEPTION("构造函数出错");
-    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Costructor error!");
 }
 
 Rectangle::Rectangle( double xPos,
@@ -31,17 +28,19 @@ Rectangle::Rectangle( double xPos,
         this->m_height = height;
         this->m_angle = angle;
         this->m_shapeType = ShapeType::RECTANGLE;
+
     }
-    catch(...)
-    {
-        THROW_EXCEPTION("构造函数出错");
-    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Costructor error!");
 }
 
 
 Rectangle::~Rectangle()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -56,7 +55,7 @@ bool Rectangle::canContain(Shape *pShape)
     {
         if(nullptr == pShape)
         {
-            THROW_EXCEPTION("传入的图形错误");
+            THROW_EXCEPTION("Parameter error!");
         }
 
         if(ShapeType::CIRCLE == pShape->shapeType())            //若传入的为圆形
@@ -81,7 +80,7 @@ bool Rectangle::canContain(Shape *pShape)
 
             if(0 != ((Rectangle*)pShape)->angle() || 0!=this->m_angle)
             {
-                THROW_EXCEPTION("不支持对角度不为0的矩形进行判断");
+                THROW_EXCEPTION("Not support type!");
             }
 
             if(this->centerPoint().posY()+this->height()/2 > centerPoint.posY()+height/2 &&
@@ -95,11 +94,13 @@ bool Rectangle::canContain(Shape *pShape)
         }
         return false;
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("判断图形是否包含在矩形时出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Check error!");
 }
 
 void Rectangle::findBoundaryPoints()
 {
+    try
+    {
     if(0 != this->m_angle || this->m_limitPoints.size() != 0)
     {
         return;
@@ -120,6 +121,8 @@ void Rectangle::findBoundaryPoints()
     this->m_limitPoints.push_back(
                 Point(this->centerPoint().posX()+this->m_width/2,
                       this->centerPoint().posY()-this->m_height));
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Find error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -11,16 +11,20 @@ Item::Item()
     {
 
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("构造函数出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Constructor error!");
 }
 
 Item::~Item()
 {
-    if(this->m_pAlg != nullptr )
+    try
     {
-        delete this->m_pAlg;
-        this->m_pAlg = nullptr;
+        if(this->m_pAlg != nullptr )
+        {
+            delete this->m_pAlg;
+            this->m_pAlg = nullptr;
+        }
     }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!")
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -35,12 +39,12 @@ bool Item::inspect()
     {
         if(nullptr == this->m_pAlg)
         {
-            THROW_EXCEPTION("item未加入检测算法");
+            THROW_EXCEPTION("No item alg!");
         }
 
         return this->m_pAlg->inspect();
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("检测item出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Inspect item error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

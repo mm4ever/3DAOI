@@ -12,7 +12,7 @@ Component::Component()
     {
         this->m_measuredObjType = MeasuredObjType::COMPONENT;
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("构造函数出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Constructor error!");
 }
 
 Component::Component(int id,
@@ -34,12 +34,16 @@ Component::Component(int id,
         this->m_rectangle.setWidth(width);
         this->m_rectangle.setHeight(height);
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("构造函数出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Constructor error!");
 }
 
 Component::~Component()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!");
 }
 
 void Component::inspect()
@@ -51,7 +55,7 @@ void Component::inspect()
             this->m_isResultOk = this->m_pLib->inspect();
         }
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("检测元件时出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Inspect error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -13,12 +13,16 @@ Library::Library()
     {
 
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("构造函数出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Constructor error!");
 }
 
 Library::~Library()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -49,7 +53,7 @@ bool Library::inspect()
 
         return true;
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("检测函数出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Inspect error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

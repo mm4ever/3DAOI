@@ -137,17 +137,21 @@ void MainWnd::inspectClick()
 
 void MainWnd::writeNGToXml()
 {
-    string xmlFileName{""};     // xml文件名
-    QString xmlPath{""};        // xml文件路径
+    try
+    {
+        string xmlFileName{""};     // xml文件名
+        QString xmlPath{""};        // xml文件路径
 
-    xmlFileName = APP::g_pSequence->inspectionManager().inspectionData().board()
-            .name() + "_" + DataGenerator::getCurrentTime()+".xml";
-    xmlPath = APP::g_pAppService->pathSetting().exportXmlPath() +
-            xmlFileName.c_str();
+        xmlFileName = APP::g_pSequence->inspectionManager().inspectionData().board()
+                .name() + "_" + DataGenerator::getCurrentTime()+".xml";
+        xmlPath = APP::g_pAppService->pathSetting().exportXmlPath() +
+                xmlFileName.c_str();
 
-    // 将NG的元件写入到xml文件中
-    APP::g_pSequence->inspectionManager().inspectionData().
-            writeInspectionDataToXml( xmlPath );
+        // 将NG的元件写入到xml文件中
+        APP::g_pSequence->inspectionManager().inspectionData().
+                writeInspectionDataToXml( xmlPath );
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Write NG data to xml!");
 }
 
 void MainWnd::loadJob(const QString& jobPath)
@@ -246,7 +250,7 @@ void MainWnd::loadJob(const QString& jobPath)
                 }
                 else
                 {
-                    THROW_EXCEPTION("MainItem算法类型读取失败！");
+                    THROW_EXCEPTION("Read MainItem alg error！");
                 }
                 (*it)->mainItem().setLibId( boost::get<int>(sqlite.columnValue(0)) );
                 (*it)->mainItem().setId( boost::get<int>(sqlite.columnValue(1)) );
@@ -290,7 +294,7 @@ void MainWnd::loadJob(const QString& jobPath)
                         }
                         else
                         {
-                            THROW_EXCEPTION("SubItem算法类型读取失败！");
+                            THROW_EXCEPTION("Read SubItem alg error！");
                         }
                         item.setLibId( boost::get<int>(sqlite.columnValue(0)) );
                         item.setId( boost::get<int>(sqlite.columnValue(1)) );
@@ -331,7 +335,7 @@ void MainWnd::loadJob(const QString& jobPath)
                 }
                 else
                 {
-                    THROW_EXCEPTION("元件类型读取失败！");
+                    THROW_EXCEPTION("Read component type error!");
                 }
                 pMeasuredObj->setId( boost::get<int>(sqlite.columnValue(0)) );
                 pMeasuredObj->name() = boost::get<string>(sqlite.columnValue(1));
@@ -359,7 +363,7 @@ void MainWnd::loadJob(const QString& jobPath)
         }
         else
         {
-            THROW_EXCEPTION("程式加载失败！");
+            THROW_EXCEPTION("Load job file error!");
         }
     }
     catch( const CustomException& ex )
@@ -383,7 +387,7 @@ void MainWnd::createDefaultJob(const QString& jobName)
 
         if( !sqlite.isOpened() )
         {
-            THROW_EXCEPTION("数据库打开失败！");
+            THROW_EXCEPTION("Open sqlite error!");
         }
         //>>>-------------------------------------------------------------------------------------------------------------------------------------
         //1 创建InspectionData表，表中包含字段：Version、LastEditingTime
@@ -453,7 +457,7 @@ void MainWnd::createDefaultJob(const QString& jobName)
             }
             else
             {
-                THROW_EXCEPTION("元件类型错误！");
+                THROW_EXCEPTION("Component type error!");
             }
 
             sqlite.execute( sqlInsert, (*i)->id(),
@@ -524,7 +528,7 @@ void MainWnd::createDefaultJob(const QString& jobName)
             }
             else
             {
-                THROW_EXCEPTION("MainItem算法类型错误！");
+                THROW_EXCEPTION("MainItem alg type error！");
             }
             sqlite.execute( sqlInsert, (*i)->mainItem().libId(),
                                        (*i)->mainItem().id(),
@@ -574,7 +578,7 @@ void MainWnd::createDefaultJob(const QString& jobName)
                 }
                 else
                 {
-                    THROW_EXCEPTION("SubItem算法类型错误！");
+                    THROW_EXCEPTION("SubItem alg type error！");
                 }
                 sqlite.execute( sqlInsert, (*j).libId(),
                                            (*j).id(),

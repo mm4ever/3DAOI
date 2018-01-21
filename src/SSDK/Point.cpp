@@ -9,11 +9,9 @@ Point::Point()
 {
     try
     {
+
     }
-    catch(...)
-    {
-        THROW_EXCEPTION("构造函数出错");
-    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Costructor error!");
 }
 
 Point::Point(double posX, double posY)
@@ -23,15 +21,16 @@ Point::Point(double posX, double posY)
         this->m_posX = posX;
         this->m_posY = posY;
     }
-    catch(...)
-    {
-        THROW_EXCEPTION("构造函数出错");
-    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Constructor error!");
 }
 
 Point::~Point()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

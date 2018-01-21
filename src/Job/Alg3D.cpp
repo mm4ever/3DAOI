@@ -12,12 +12,16 @@ Alg3D::Alg3D()
     {
         this->m_algType = AlgType::ALG3D;
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("构造函数出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Constructor error!");
 }
 
 Alg3D::~Alg3D()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -33,7 +37,7 @@ bool Alg3D::inspect()
         double NGProbability = 0.4;
         return (NumRandom::randomBool(NGProbability));
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("模拟3D检测出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("3D inspect error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -9,12 +9,20 @@ using namespace SSDK::DB;
 
 InspectionManager::InspectionManager()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Constructor error!");
 }
 
 InspectionManager::~InspectionManager()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -49,7 +57,7 @@ void InspectionManager::loadInspectionData(QString &jobPath)
         auto isOpened = sqlite.isOpened();
         if( isOpened )
         {
-            //>>>----------------------------------------------------------------------------------------------------------
+            //>>>---------------------------------------------------------------
             //1 读取InspectionData表
             // 查询数据表中所有内容
             string selectedString = "select * from InspectionData";
@@ -69,7 +77,7 @@ void InspectionManager::loadInspectionData(QString &jobPath)
                 this->m_inspectionData.lastEditingTime() = boost::get<string>(sqlite.columnValue(1));
             }
 
-            //>>>----------------------------------------------------------------------------------------------------------
+            //>>>---------------------------------------------------------------
             //2 读取Board表
             selectedString = "select * from Board";
             sqlite.prepare( selectedString );
@@ -89,7 +97,7 @@ void InspectionManager::loadInspectionData(QString &jobPath)
                 this->m_inspectionData.board().originPoint().setPosY( boost::get<double>(sqlite.columnValue(4)) );
             }
 
-            //>>>-------------------------------------------------------------------------------------------------------------------------------------
+            //>>>---------------------------------------------------------------
             //3 读取Library表
             selectedString = "select * from Library";
             sqlite.prepare( selectedString );
@@ -110,7 +118,7 @@ void InspectionManager::loadInspectionData(QString &jobPath)
                 this->m_inspectionData.board().pLibs().push_back(pLibrary);
             }
 
-            //>>>-------------------------------------------------------------------------------------------------------------------------------------
+            //>>>---------------------------------------------------------------
             //4 读取MainItem表
             selectedString = "select * from MainItem";
             sqlite.prepare( selectedString );
@@ -136,7 +144,7 @@ void InspectionManager::loadInspectionData(QString &jobPath)
                 }
                 else
                 {
-                    THROW_EXCEPTION("MainItem算法类型读取失败！");
+                    THROW_EXCEPTION("Read MainItem alg type error！");
                 }
                 (*it)->mainItem().setLibId( boost::get<int>(sqlite.columnValue(0)) );
                 (*it)->mainItem().setId( boost::get<int>(sqlite.columnValue(1)) );
@@ -149,7 +157,7 @@ void InspectionManager::loadInspectionData(QString &jobPath)
                 ++it;
             }
 
-            //>>>-------------------------------------------------------------------------------------------------------------------------------------
+            //>>>---------------------------------------------------------------
             //5 读取SubItem表
             selectedString = "select * from SubItem";
             sqlite.prepare( selectedString );
@@ -180,7 +188,7 @@ void InspectionManager::loadInspectionData(QString &jobPath)
                         }
                         else
                         {
-                            THROW_EXCEPTION("SubItem算法类型读取失败！");
+                            THROW_EXCEPTION("Read SubItem alg type error！");
                         }
                         item.setLibId( boost::get<int>(sqlite.columnValue(0)) );
                         item.setId( boost::get<int>(sqlite.columnValue(1)) );
@@ -196,7 +204,7 @@ void InspectionManager::loadInspectionData(QString &jobPath)
                 }
             }
 
-            //>>>-------------------------------------------------------------------------------------------------------------------------------------
+            //>>>---------------------------------------------------------------
             //6 读取MeasuredObjs表
             selectedString = "select * from MeasuredObjs";
             sqlite.prepare( selectedString );
@@ -221,7 +229,7 @@ void InspectionManager::loadInspectionData(QString &jobPath)
                 }
                 else
                 {
-                    THROW_EXCEPTION("元件类型读取失败！");
+                    THROW_EXCEPTION("Read component type error!");
                 }
                 pMeasuredObj->setId( boost::get<int>(sqlite.columnValue(0)) );
                 pMeasuredObj->name() = boost::get<string>(sqlite.columnValue(1));
@@ -249,7 +257,7 @@ void InspectionManager::loadInspectionData(QString &jobPath)
         }
         else
         {
-            THROW_EXCEPTION("程式加载失败！");
+            THROW_EXCEPTION("Load job file error!");
         }
     }
     catch( const CustomException& ex )

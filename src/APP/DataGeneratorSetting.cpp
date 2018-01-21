@@ -1,8 +1,11 @@
 #include "DataGeneratorSetting.hpp"
 
+using namespace std;
+
 using namespace APP;
 
-using namespace std;
+//>>>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// constructor & destructor
 
 DataGeneratorSetting::DataGeneratorSetting()
 {
@@ -10,7 +13,7 @@ DataGeneratorSetting::DataGeneratorSetting()
     {
 
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("构造函数出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Constructor error!");
 }
 
 DataGeneratorSetting::~DataGeneratorSetting()
@@ -41,22 +44,26 @@ DataGeneratorSetting::~DataGeneratorSetting()
     }
 }
 
+//<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//>>>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// member function
+
 void DataGeneratorSetting::load(const QString &path)
 {
     try
     {
-        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //>>>-------------------------------------------------------------------
         //step1　判断路径下有没有文件，有则把数据存入到相关vector中，没有生成默认配置文件存到vector中
         if(!QFile::exists(path))
         {
-            cout << "指定目录下没有数据生成相关配置文件,生成默认配置文件" << endl;
             writeDefaultSettingFile(path);
         }
 
         QSettings settings(path, QSettings::IniFormat);
         vector<ComponentStyle> *pComponentType;
 
-        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //>>>-------------------------------------------------------------------
         //step2 几种大类的元件类型存到vector中，例如CHIP,SOP
         int componentTypeCnt = settings.beginReadArray("COMPONENT_TYPE");
         QString str;
@@ -68,7 +75,7 @@ void DataGeneratorSetting::load(const QString &path)
         }
         settings.endArray();
 
-        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //>>>-------------------------------------------------------------------
         //step3 为每个类型的元件创建一个vector,比如一个CHIP大类是一个vector
         ComponentStyle component;
         int componentCnt=0;
@@ -88,7 +95,7 @@ void DataGeneratorSetting::load(const QString &path)
             settings.endArray();
         }
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("加载生成数据的配置文件出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Load config file error!");
 }
 
 void DataGeneratorSetting::writeDefaultSettingFile(const QString &path)
@@ -97,19 +104,19 @@ void DataGeneratorSetting::writeDefaultSettingFile(const QString &path)
     {
         QSettings settings(path, QSettings::IniFormat);
 
-        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //>>>-------------------------------------------------------------------
         //step1 设置chip类原件和其他类型元件个数
         settings.setValue("chipCnt",500);
         settings.setValue("otherComponentCnt",100);
 
-        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //>>>-------------------------------------------------------------------
         //step2 设置board信息
         settings.setValue("BOARD/boardWidth",510.00);
         settings.setValue("BOARD/boardHeight",510.00);
         settings.setValue("BOARD/boardOriginX",0.0);
         settings.setValue("BOARD/boardOriginY",0.0);
 
-        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //>>>-------------------------------------------------------------------
         //step3 设置fiducialMark信息
         settings.setValue("FICUICIALMARK/fiducialMarkCnt",2);
         settings.setValue("FICUICIALMARK/fiducialMarkWidth",4.0);
@@ -120,7 +127,7 @@ void DataGeneratorSetting::writeDefaultSettingFile(const QString &path)
         settings.setValue("FICUICIALMARK/secondFiducialMarkCenterY",508.0);
         settings.setValue("FICUICIALMARK/fiducialMarkAngle",0);
 
-        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //>>>-------------------------------------------------------------------
         //step4 设置元件类型（大类）
         vector<QString> componentTypes;
         componentTypes.push_back("CHIP");
@@ -137,7 +144,7 @@ void DataGeneratorSetting::writeDefaultSettingFile(const QString &path)
         }
         settings.endArray();
 
-        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //>>>-------------------------------------------------------------------
         //step5 设置元件类型（小类）把相关数据存到vector中，一次写入到配置文件
         vector<ComponentStyle> CHIP,SOP,SOT,QFN,QFP,BGA;
         ComponentStyle chip,ic;
@@ -408,5 +415,7 @@ void DataGeneratorSetting::writeDefaultSettingFile(const QString &path)
         }
         settings.endArray();
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("生成默认元件类型配置文件出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Create default config file error!");
 }
+
+//<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -12,12 +12,16 @@ Alg2D::Alg2D()
     {
         this->m_algType = AlgType::ALG2D;
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("构造函数出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Constructor error!");
 }
 
 Alg2D::~Alg2D()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -32,7 +36,7 @@ bool Alg2D::inspect()
         double NGProbability = 0.2;
         return (NumRandom::randomBool(NGProbability));
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("模拟检测出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Inspect error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
