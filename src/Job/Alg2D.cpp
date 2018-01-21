@@ -8,12 +8,20 @@ using namespace SSDK;
 
 Alg2D::Alg2D()
 {
-
+    try
+    {
+        this->m_algType = AlgType::ALG2D;
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Constructor error!");
 }
 
 Alg2D::~Alg2D()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -23,8 +31,12 @@ Alg2D::~Alg2D()
 
 bool Alg2D::inspect()
 {
-    double falseProbability = 0.2;
-    return (NumRandom::randomBool(falseProbability));
+    try
+    {
+        double NGProbability = 0.2;
+        return (NumRandom::randomBool(NGProbability));
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Inspect error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

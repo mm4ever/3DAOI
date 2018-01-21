@@ -7,12 +7,20 @@ using namespace SSDK;
 
 FormatConvertion::FormatConvertion()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Constructor error!");
 }
 
 FormatConvertion::~FormatConvertion()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

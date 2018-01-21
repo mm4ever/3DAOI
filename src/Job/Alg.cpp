@@ -7,12 +7,20 @@ using namespace Job;
 
 Alg::Alg()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Constructor error!");
 }
 
 Alg::~Alg()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

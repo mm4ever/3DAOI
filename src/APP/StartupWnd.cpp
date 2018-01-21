@@ -1,5 +1,7 @@
 #include "StartupWnd.hpp"
 
+using namespace std;
+
 using namespace APP;
 
 //>>>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -7,12 +9,20 @@ using namespace APP;
 
 StartupWnd::StartupWnd()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Constructor error!");
 }
 
 StartupWnd::~StartupWnd()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -23,7 +33,13 @@ StartupWnd::~StartupWnd()
 
 void StartupWnd::run()
 {
-
+    try
+    {
+        int waitingTime = 2;                    //等待时间(单位秒)
+        cout << "Loading..." <<endl;
+        this_thread::sleep_for(std::chrono::seconds(waitingTime));
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Running startup window error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

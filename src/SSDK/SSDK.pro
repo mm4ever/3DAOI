@@ -11,7 +11,9 @@ SOURCES += \
     NumRandom.cpp \
     Rectangle.cpp \
     Shape.cpp \
-    Point.cpp
+    Point.cpp \
+    DB/Blob.cpp \
+    DB/SqlitedDb.cpp
 
 HEADERS += \
     Circle.hpp \
@@ -20,5 +22,14 @@ HEADERS += \
     NumRandom.hpp \
     Rectangle.hpp \
     Shape.hpp \
-    Point.hpp
+    Point.hpp \
+    DB/Blob.hpp \
+    DB/SqliteDb.hpp
 
+INCLUDEPATH += $$PWD/../../include/sqlite
+INCLUDEPATH += $$PWD/../../include
+
+unix::LIBS += -L$$PWD/../lib/ -lsqlite3
+
+unix::LIBS += -L/usr/lib/x86_64-linux-gnu\
+-ldl

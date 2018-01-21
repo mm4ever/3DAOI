@@ -18,7 +18,8 @@ HEADERS += \
     Library.hpp \
     MainItem.hpp \
     MeasuredObj.hpp \
-    SubItem.hpp
+    SubItem.hpp \
+    IInspection.hpp
 
 SOURCES += \
     Alg.cpp \
@@ -34,7 +35,8 @@ SOURCES += \
     Library.cpp \
     MainItem.cpp \
     MeasuredObj.cpp \
-    SubItem.cpp
+    SubItem.cpp \
+    IInspection.cpp
 
 INCLUDEPATH += $$PWD/../../include
 DEPENDPATH += $$PWD/../../include

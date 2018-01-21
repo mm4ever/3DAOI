@@ -3,21 +3,18 @@
 
 #include <iostream>
 
+#include <QFile>
+#include <QSettings>
+
+#include "CustomException.hpp"
+#include "FormatConvertor.hpp"
+
 namespace APP
 {
 
     /**
-     * @brief The MachineName enum
-     *      机器名称
-     */
-    enum class MachineName
-    {
-        AOI,    // 自动光学检测设备
-        SPI     // 锡膏检测设备
-    };
-    /**
      * @brief The Theme enum
-     *      机器软件界面使用的主题
+     *      软件界面使用的主题
      */
     enum class Theme
     {
@@ -26,7 +23,7 @@ namespace APP
     };
     /**
      * @brief The Language enum
-     *      机器软件界面使用的语言
+     *      软件界面使用的语言
      */
     enum class Language
     {
@@ -44,9 +41,15 @@ namespace APP
         DUAL_LANE       // 双轨机,有两条轨道的机器
     };
 
+    enum class MachineType
+    {
+        AOI,            //设备的检测类型为检测电路板上的元器件
+        SPI             //设备的检测类型为检测电路板上的锡膏
+    };
+
     /**
      *  @brief AppSetting
-     *
+     *          AppSetting类是软件应用层的基本属性设置,如设置软件的主题,语言等
      *  @author peter
      *  @version 1.00 2018-01-06 peter
      *                note:create it
@@ -59,12 +62,33 @@ namespace APP
         // constructor & destructor
 
         AppSetting();
-        virtual~AppSetting();
+
+        virtual ~AppSetting();
+
+        //>>>-------------------------------------------------------------------
+        // get & set function
+
+        QString& companyName(){return this->m_companyName;}
+
+        MachineType& machineType(){return this->m_machineType;}
+
+        Theme& theme(){return this->m_theme;}
+
+        Language& language(){return this->m_language;}
+
+        LaneMode& laneMode(){return this->m_laneMode;}
 
         //>>>-------------------------------------------------------------------
         // member function
 
-        void load(std::string& appPath);
+        /**
+         *  @brief load
+         *      该函数功能是读取配置文件中的信息
+         *  @param appPath
+         *      待读取的配置文件路径
+         *  @return N/A
+         */
+        void load(const QString& appPath);
 
 
     private:
@@ -72,11 +96,12 @@ namespace APP
         //>>>-------------------------------------------------------------------
         // member variant
 
-        std::string m_companyName {""};             // 公司名称
-        std::string m_machineName {""};             // 机器名称
+        QString m_companyName {"Sung"};             // 公司名称
+        // 机器的类型,AOI为检测电路板上的元器件,SPI为检测电路板上的锡膏
+        MachineType m_machineType {MachineType::AOI};
         Theme m_theme {Theme::BLACK};               // 软件主题
-        Language m_lang {Language::CN};             // 软件语言
-        LaneMode m_laneMode {LaneMode::DUAL_LANE};  // 软件运行的模式
+        Language m_language {Language::CN};         // 软件语言
+        LaneMode m_laneMode {LaneMode::SIMULATOR};  // 机器种类
 
         //<<<-------------------------------------------------------------------
 

@@ -7,23 +7,44 @@ using namespace Job;
 
 Item::Item()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Constructor error!");
 }
 
 Item::~Item()
 {
-
+    try
+    {
+        if(this->m_pAlg != nullptr )
+        {
+            delete this->m_pAlg;
+            this->m_pAlg = nullptr;
+        }
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!")
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 //>>>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// member function
+// override function
 
 bool Item::inspect()
 {
+    try
+    {
+        if(nullptr == this->m_pAlg)
+        {
+            THROW_EXCEPTION("No item alg!");
+        }
 
+        return this->m_pAlg->inspect();
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Inspect item error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

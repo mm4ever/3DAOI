@@ -1,6 +1,8 @@
 TEMPLATE = app
 CONFIG += console c++11
 CONFIG -= app_bundle
+QT += core
+QT += xml
 
 SOURCES += \
     main.cpp \
@@ -11,10 +13,12 @@ SOURCES += \
     PathSetting.cpp \
     Sequence.cpp \
     StartupWnd.cpp \
-    UiManager.cpp
+    UIManager.cpp \
+    DataGenerator.cpp \
+    DataGeneratorSetting.cpp \
+    GlobalVariants.cpp
 
 HEADERS += \
-    App.hpp \
     AppService.hpp \
     AppSetting.hpp \
     LoginWnd.hpp \
@@ -22,6 +26,17 @@ HEADERS += \
     PathSetting.hpp \
     Sequence.hpp \
     StartupWnd.hpp \
-    UiManager.hpp
+    UIManager.hpp \
+    DataGenerator.hpp \
+    DataGeneratorSetting.hpp \
+    GlobalVariants.hpp
+
+INCLUDEPATH += $$PWD/../../include/sqlite
+INCLUDEPATH += $$PWD/../../include
+
+unix::LIBS += -L$$PWD/../lib/ -lsqlite3
+
+unix::LIBS += -L/usr/lib/x86_64-linux-gnu\
+-ldl
 
 include(dependencies.pri)

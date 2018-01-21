@@ -11,15 +11,16 @@ NumRandom::NumRandom()
     {
 
     }
-    catch(...)
-    {
-        THROW_EXCEPTION("构造函数出错");
-    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Costructor error!");
 }
 
 NumRandom::~NumRandom()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -37,7 +38,7 @@ double NumRandom::randomDouble(double min, double max)
     }
     else
     {
-         THROW_EXCEPTION("生成随机数异常:最大值小于最小值!")
+         THROW_EXCEPTION("Max smaller than min!")
     }
 }
 
@@ -49,7 +50,7 @@ int NumRandom::randomInt(int min, int max)
     }
     else
     {
-         THROW_EXCEPTION("生成随机数异常:最大值小于最小值!")
+         THROW_EXCEPTION("Max smaller than min!")
     }
 }
 
@@ -65,7 +66,7 @@ bool NumRandom::randomBool(double falseProbability)
         return true;
     }
 
-    THROW_EXCEPTION("生成随机的bool值出错：传入参数异常");
+    THROW_EXCEPTION("Parameter error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

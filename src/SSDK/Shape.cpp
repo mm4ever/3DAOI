@@ -10,16 +10,18 @@ Shape::Shape()
 {
     try
     {
+
     }
-    catch(...)
-    {
-        THROW_EXCEPTION("构造函数出错");
-    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Constructor error!");
 }
 
 Shape::~Shape()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
