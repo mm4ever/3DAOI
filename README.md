@@ -34,7 +34,6 @@ mkdir -p debug/config include/Job include/SSDK lib/debug
 2. 打开项目:
     - 依次点击Welcome->OpenProject->(3DAOI项目路径) 3DAOI/src/APP/APP.pro
     - 将 Build directory 设置为: ../../debug
-3. 配置完成
 
 #### Job
 1. 打开项目:
@@ -43,7 +42,6 @@ mkdir -p debug/config include/Job include/SSDK lib/debug
 2. 设置Build Steps:
     - 依次点击Projects->BuildSteps->AddBuildStep->CustomProcessStep
     - 将Command修改为:./debug_build.sh
-3. 配置完成
 
 #### SSDK
 1. 打开项目:
@@ -52,6 +50,5 @@ mkdir -p debug/config include/Job include/SSDK lib/debug
 2. 设置Build Steps:
     - 依次点击Projects->BuildSteps->AddBuildStep->CustomProcessStep
     - 将Command修改为:./debug_build.sh
-3. 配置完成
 
 
