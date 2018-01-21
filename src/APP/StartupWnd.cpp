@@ -35,8 +35,9 @@ void StartupWnd::run()
 {
     try
     {
+        int waitingTime = 2;                    //等待时间(单位秒)
         cout << "Loading..." <<endl;
-        this_thread::sleep_for(std::chrono::seconds(2));
+        this_thread::sleep_for(std::chrono::seconds(waitingTime));
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Running startup window error!");
 }

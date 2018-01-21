@@ -10,7 +10,9 @@ namespace APP
 {
     /**
      *  @brief AppSerivice
-     *      该类是存放pathSettingPath路径配置的类
+     *          该类是App层参数设置的类,
+     *              例如:1.设置软件主题,语言等
+     *                  2.配置文件的路径等
      *  @author peter
      *  @version 1.00 2018-01-05 peter
      *                note:create it
@@ -23,27 +25,16 @@ namespace APP
         // constructor & destructor
 
         AppService();
-        virtual~AppService();
+
+        virtual ~AppService();
 
         //>>>-------------------------------------------------------------------
         // set & get function
 
-        void setPathSettingPath(QString& path)
-        {
-            this->m_pathSettingPath = path;
-        }
-        QString& pathSettingPaht(){return this->m_pathSettingPath;}
+        QString& pathSettingPath(){return this->m_pathSettingPath;}
 
-        void setPathSetting(PathSetting& pathSetting)
-        {
-            this->m_pathSetting = pathSetting;
-        }
         PathSetting& pathSetting(){return this->m_pathSetting;}
 
-        void setAppSetting(AppSetting& appSetting)
-        {
-            this->m_appSetting = appSetting;
-        }
         AppSetting& appSetting(){return this->m_appSetting;}
 
         //>>>-------------------------------------------------------------------
@@ -52,8 +43,8 @@ namespace APP
         /**
          * @brief init
          *      加载存放路径的配置文件，初始化类的成员变量
-         *  1.加载存放路径的配置文件
-         *  2.加载软件界面需要的配置文件
+         *       1.加载存放路径的配置文件
+         *       2.加载软件界面需要的配置文件
          * @param N/A
          * @return N/A
          */

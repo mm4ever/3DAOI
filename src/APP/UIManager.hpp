@@ -14,9 +14,7 @@ namespace APP
 {
     /**
      *  @brief UIManager
-     *          UIManager类组合了开始界面、登录界面、主界面
-     *  软件运行时,依次运行以上三个界面,通过init()函数进行类成员的初始化.
-     *
+     *          UIManager类负责调度软件UI界面的类
      *  @author peter
      *  @version 1.00 2018-01-06 peter
      *                note:create it
@@ -29,13 +27,17 @@ namespace APP
         // constructor & destructor
 
         UIManager();
+
         virtual~UIManager();
 
         //>>>-------------------------------------------------------------------
         // set & get function
 
-        LoginWnd& loginWnd(){return this->m_pLoginWnd;}
+        LoginWnd& loginWnd(){return this->m_loginWnd;}
 
+        StartupWnd& startupWnd(){return this->m_startupWnd;}
+
+        MainWnd& mainWnd(){return this->m_mainWnd;}
         //>>>-------------------------------------------------------------------
         // member function
 
@@ -61,9 +63,9 @@ namespace APP
         //>>>-------------------------------------------------------------------
         // member variant
 
-        StartupWnd m_pStartupWnd;       // 启动界面
-        LoginWnd m_pLoginWnd;           // 登录界面
-        MainWnd m_pMainWnd;             // 主界面
+        StartupWnd m_startupWnd;       // 启动界面
+        LoginWnd m_loginWnd;           // 登录界面
+        MainWnd m_mainWnd;             // 主界面
 
         //<<<-------------------------------------------------------------------
 

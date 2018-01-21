@@ -6,6 +6,13 @@
 namespace Job
 {
 
+    /**
+     *  @brief  IInspection
+     *              底层返回bool类型的检测接口
+     *  @author lynn
+     *  @version 1.00 2018-01-21 lynn
+     *                note:create it
+     */
     class IInspection
     {
     public:
@@ -20,6 +27,12 @@ namespace Job
         //>>>-----------------------------------------------------------------------
         // virtual function
 
+        /**
+        *  @brief  inspect
+        *           检测检测对象的虚函数
+        *  @param  N/A
+        *  @return bool:返回一个bool类型的值
+        */
         virtual bool inspect()=0;
 
         //<<<-----------------------------------------------------------------------

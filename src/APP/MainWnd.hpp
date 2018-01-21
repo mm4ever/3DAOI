@@ -7,7 +7,7 @@
 #include <QDir>
 
 #include "DB/SqliteDb.hpp"
-#include "GlobalVariable.hpp"
+#include "GlobalVariants.hpp"
 #include "CustomException.hpp"
 #include "FiducialMark.hpp"
 #include "Component.hpp"
@@ -64,6 +64,14 @@ namespace APP
          * @return N/A
          */
         void inspectClick();
+
+        /**
+         * @brief writeNGToXml
+         *      将NG的元件信息写入xml文件中
+         * @param N/A
+         * @return N/A
+         */
+        void writeNGToXml();
 
         /**
          * @brief loadJob

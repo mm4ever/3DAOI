@@ -40,7 +40,12 @@ namespace Job
         //>>>-----------------------------------------------------------------------
         //member function
 
-        void writeToXml(std::string& path);
+        /**
+        *  @brief
+        *  @param
+        *  @return
+        */
+        void writeInspectionDataToXml(QString path);
 
         /**
         *  @brief   检测本次程式对应的基板
@@ -49,15 +54,14 @@ namespace Job
         */
         void inspect();
 
-
     private:
 
         //>>>-----------------------------------------------------------------------
         //member variant
 
-        Board m_board;                      //与检测数据对应的检测的基板
-        std::string m_version{"\0"};        //检测程式的版本号
-        std::string m_lastEditingTime{"\0"};//最后一次修改程式的时间
+        Board m_board;                    //与检测数据对应的检测的基板
+        std::string m_version{""};        //检测程式的版本号
+        std::string m_lastEditingTime{""};//最后一次修改程式的时间
     };
 
 }//End of namespace Job

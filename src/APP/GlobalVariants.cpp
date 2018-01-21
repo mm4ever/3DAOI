@@ -1,4 +1,4 @@
-#include "GlobalVariable.hpp"
+#include "GlobalVariants.hpp"
 
 // 这个g_pAppService前的APP::不能省略
 APP::AppService* APP::g_pAppService {nullptr};

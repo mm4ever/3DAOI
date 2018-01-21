@@ -1,6 +1,8 @@
 TEMPLATE = app
 CONFIG += console c++11
 CONFIG -= app_bundle
+QT += core
+QT += xml
 
 SOURCES += \
     main.cpp \
@@ -12,9 +14,9 @@ SOURCES += \
     Sequence.cpp \
     StartupWnd.cpp \
     UIManager.cpp \
-    GlobalVariable.cpp \
     DataGenerator.cpp \
-    DataGeneratorSetting.cpp
+    DataGeneratorSetting.cpp \
+    GlobalVariants.cpp
 
 HEADERS += \
     AppService.hpp \
@@ -25,9 +27,9 @@ HEADERS += \
     Sequence.hpp \
     StartupWnd.hpp \
     UIManager.hpp \
-    GlobalVariable.hpp \
     DataGenerator.hpp \
-    DataGeneratorSetting.hpp
+    DataGeneratorSetting.hpp \
+    GlobalVariants.hpp
 
 INCLUDEPATH += $$PWD/../../include/sqlite
 INCLUDEPATH += $$PWD/../../include

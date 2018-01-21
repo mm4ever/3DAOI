@@ -1,8 +1,9 @@
 ﻿#include "DataGenerator.hpp"
 
+using namespace std;
+
 using namespace APP;
 using namespace Job;
-using namespace std;
 
 DataGenerator::DataGenerator()
 {
@@ -168,8 +169,8 @@ void DataGenerator::generateBoardData(Board &board)
                 double subItemShiftX = SSDK::NumRandom::randomDouble(0,fiducialMarkWidth-subItemWidth/2);//subItem的X偏移
                 double subItemShiftY = SSDK::NumRandom::randomDouble(0,fiducialMarkHeight-subItemHeight/2);//subItem的Y偏移
 
-                board.pObjs()[i]->pLib()->itemList().push_back(SubItem());
-                SubItem& subItem = board.pObjs()[i]->pLib()->itemList().back();
+                board.pObjs()[i]->pLib()->subItems().push_back(SubItem());
+                SubItem& subItem = board.pObjs()[i]->pLib()->subItems().back();
                 subItem.setLibId(board.pObjs()[i]->pLib()->id());
                 subItem.setId(subItemId);
                 subItem.name() = subItemName;

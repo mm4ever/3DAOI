@@ -28,6 +28,9 @@ namespace Job
     {
     public:
 
+        /**
+         *  @brief 基板上的检测对象类型
+         */
         enum class MeasuredObjType
         {
             FIDUCIALMARK,       //基准点，每个基板上最少有两个，用于定位基板
@@ -76,7 +79,7 @@ namespace Job
 
         int m_id{0};
         bool m_isResultOk{false};           //检测目标的检测结果是否为OK
-        std::string m_name{"\0"};
+        std::string m_name{""};
         SSDK::Rectangle m_rectangle;        //与检测目标位置、大小贴合的矩形
         Library* m_pLib{nullptr};           //检测时所用的库
         MeasuredObjType m_measuredObjType;  //类为检测目标基类，故需要记录检测目标类型

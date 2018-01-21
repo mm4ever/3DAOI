@@ -10,6 +10,11 @@ InspectionSetting::InspectionSetting()
 {
     try
     {
+        int width = 4096;
+        int height = 3072;
+        this->m_imgWidth = width;
+        this->m_imgHeight = height;
+        this->m_imgBit = ImgBit::BIT8;
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("构造函数出错");
 }
@@ -31,13 +36,7 @@ void InspectionSetting::load(QString &path)
     {
         //>>>-------------------------------------------------------------------------------------------------------------------------------------
         //step1
-        if(!QFile::exists(path))                //如果文件不存在,则直接抛出异常信息
-        {
-            THROW_EXCEPTION("读取CapturSetting文件失败!");
-        }
-        //>>>-------------------------------------------------------------------------------------------------------------------------------------
-        //step2
-        else                                   //如果文件存在,则读取文件中的数据
+        if(QFile::exists(path))                // 文件存在,加载配置文件
         {
             //将类QSettings实例化一个对象
             //path:存放文件的路径,QSettings::IniFormat: 为存放文件的格式
@@ -47,29 +46,29 @@ void InspectionSetting::load(QString &path)
             //step2.1
             //读取文件Image/Width(图像宽度)数据,并判断是否与系统默认值匹配
             //如果不匹配,则抛出异常
-            int imgWidth = configFile.value("Image/Width").toInt();
+            int imgWidth = configFile.value("Width").toInt();
 
             if( this->m_imgWidth != imgWidth )
             {
-                THROW_EXCEPTION("读取文件数据Image/Width失败!");
+                THROW_EXCEPTION("读取文件数据Width失败!");
             }
 
             //>>>-------------------------------------------------------------------------------------------------------------------------------------
             //step2.2
             //读取文件Image/Height(图像高度)数据,并判断是否与系统默认值匹配,
             //如果不匹配,则抛出异常
-            int imgHeight = configFile.value("Image/Height").toInt();
+            int imgHeight = configFile.value("Height").toInt();
 
             if( this->m_imgHeight !=  imgHeight)
             {
-                THROW_EXCEPTION("读取文件数据Image/Height失败!");
+                THROW_EXCEPTION("读取文件数据Height失败!");
             }
 
             //>>>-------------------------------------------------------------------------------------------------------------------------------------
             //step2.3
             //读取文件Image/ImgBit数据,并判断是否是枚举中的元素
             //如果不匹配,则抛出异常
-            QString imgBit = configFile.value("Image/ImgBit").toString();
+            QString imgBit = configFile.value("ImgBit").toString();
 
             if(imgBit.toUpper().toStdString() == VAR_TO_STR(ImgBit::BIT8))
             {
@@ -81,11 +80,19 @@ void InspectionSetting::load(QString &path)
             }
             else
             {
-                THROW_EXCEPTION("读取文件数据Image/ImgBit失败!");
+                THROW_EXCEPTION("读取文件数据ImgBit失败!");
             }
         }
+        else                                   //如果文件存在,则读取文件中的数据
+        {
+            QSettings configFile(path,QSettings::IniFormat);
+            configFile.setValue("Width",this->m_imgWidth);
+            configFile.setValue("Height",this->m_imgHeight);
+            configFile.setValue("ImgBit",
+                                QString::fromStdString(VAR_TO_STR(ImgBit::BIT8)));
+        }
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("读取capture.ini文件异常");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("读取InspectionSetting.ini文件异常");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

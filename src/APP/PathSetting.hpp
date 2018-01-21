@@ -14,8 +14,7 @@ namespace APP
     /**
      *  @brief PathSetting
      *          PathSetting类是存放各个配置文件路径的类
-     *      包括软件界面配置文件的路径、检测程式文件的路径等
-     *
+     *             例如:软件界面配置文件的路径、检测程式文件的路径等
      *  @author peter
      *  @version 1.00 2018-01-07 peter
      *                note:create it
@@ -28,48 +27,30 @@ namespace APP
         // constructor & destructor
 
         PathSetting();
-        virtual~PathSetting();
+
+        virtual ~PathSetting();
 
         //>>>-------------------------------------------------------------------
         // set & get function
 
-        void setAppSettingPath(QString appSettingPath)
-        {
-            this->m_appSettingPath = appSettingPath;
-        }
         QString& appSettingPath(){return this->m_appSettingPath;}
 
-        void setExportXmlPath(QString exportXmlpath)
-        {
-            this->m_exportXmlPath = exportXmlpath;
-        }
         QString& exportXmlPath(){return this->m_exportXmlPath;}
 
-        void setDefaultJobFolderPath(QString defaultJobFolderPath)
-        {
-            this->m_inspectionSettingPath = defaultJobFolderPath;
-        }
         QString& defaultJobFolderPath(){return this->m_defaultJobFolderPath;}
 
-        void setInspectionSettingPath(QString inspectionSettingPath)
-        {
-            this->m_inspectionSettingPath = inspectionSettingPath;
-        }
         QString& inspectionSettingPath(){return this->m_inspectionSettingPath;}
 
-        void setUserAccountPath(QString userAccountPath)
-        {
-            this->m_userAccountPath = userAccountPath;
-        }
         QString& userAccountPath(){return this->m_userAccountPath;}
+
         //>>>-------------------------------------------------------------------
         // member function
 
         /**
          *  @brief load
-         *      该函数功能是读取配置文件中的信息
+         *          该函数功能是读取配置文件中的信息
          *  @param path
-         *      待读取的配置文件路径
+         *          待读取的配置文件路径
          *  @return N/A
          */
         void load(const QString& path);

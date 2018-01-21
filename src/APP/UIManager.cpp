@@ -44,9 +44,9 @@ void UIManager::run()
 {
     try
     {
-        this->m_pStartupWnd.run();
-        this->m_pLoginWnd.run();
-        this->m_pMainWnd.run();
+        this->m_startupWnd.run();
+        this->m_loginWnd.run();
+        this->m_mainWnd.run();
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Running UI window error!");
 }
