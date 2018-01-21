@@ -10,7 +10,7 @@ PathSetting::PathSetting()
     try
     {
         this->m_appSettingPath = "./config/AppSetting.ini";
-        this->m_exportXmlPath = "../data/xml/ExportXml.ini";
+        this->m_exportXmlPath = "../data/xml/";
         this->m_defaultJobFolderPath = "../data/job/";
         this->m_inspectionSettingPath = "./config/InspectionSetting.ini";
         this->m_userAccountPath = "./config/UserAccount.ini";

@@ -36,8 +36,8 @@ namespace APP
         /**
          * @brief init
          *     初始化类成员变量
-         *  1.初始化检测数据的类
-         *  2.初始化界面管理的类
+         *      1.初始化检测数据的类
+         *      2.初始化界面管理的类
          * @param N/A
          * @return N/A
          */
@@ -56,7 +56,7 @@ namespace APP
         //>>>-----------------------------------------------------------------------
         // member variant
 
-        Job::InspectionManager m_inspectionManager;
+        Job::InspectionManager m_inspectionManager;     //设备的检测的流程
 
         //<<<-------------------------------------------------------------------
     };

@@ -7,7 +7,7 @@
 #include <QDir>
 
 #include "DB/SqliteDb.hpp"
-#include "GlobalVariable.hpp"
+#include "GlobalVariants.hpp"
 #include "CustomException.hpp"
 #include "FiducialMark.hpp"
 #include "Component.hpp"

@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "GlobalVariable.hpp"
+#include "GlobalVariants.hpp"
 #include "UIManager.hpp"
 #include "CustomException.hpp"
 
@@ -21,7 +21,7 @@ int main()
         APP::g_pSequence = new Sequence();
         APP::g_pAppService = new AppService();
 
-        APP::g_pAppService->setPathSettingPath(pathSettingPath);
+        APP::g_pAppService->pathSettingPath() = pathSettingPath;
 
         APP::g_pAppService->init();
         APP::g_pSequence->init();
@@ -30,6 +30,7 @@ int main()
         // StartupWnd
         UIManager uiManager;
         uiManager.run();
+
     }
     CATCH_AND_PRINT_EXCEPTION();
 

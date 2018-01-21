@@ -48,7 +48,7 @@ public:
      *          获取当前时间．格式：＂20180119103513＂
      * @return 当前时间（字符串）
      */
-    std::string getCurrentTime();
+    static std::string getCurrentTime();
 
     /**
      * @brief getName 获取名字，拼接字符串和整形．结果是"字符串＿整形"

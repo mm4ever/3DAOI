@@ -42,7 +42,7 @@ void LoginWnd::run()
             cout << "\n1:register account" << endl
                  << "2:login account" << endl
                  << "3:login as a tourist" << endl
-                 << "Choice number:" << endl;
+                 << "Choice number:";
             cin >> runningType;
             while(!cin)                 // 输入不是数字
             {
@@ -61,11 +61,12 @@ void LoginWnd::run()
             {
                 cin.clear();            // 清空输入的缓存
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                this->loginAccount();
+                this->login();
             }
             else                        // 输入其他为访客登录
             {
                 cout << "Login as a tourist." << endl;
+                cout << "\n";
             }
         }while ( 1 == runningType );    // 注册完账户选择登录
     }
@@ -76,14 +77,15 @@ void LoginWnd::registerAccount()
 {
     try
     {
+        //获取用户账户信息配置文件的路径
         QString path = APP::g_pAppService->pathSetting().userAccountPath();
         QSettings config(path,QSettings::IniFormat);
-        string userName,firstPasswd,secondPasswd;
-        bool isSamePasswd = false;
+        //用户名称,首次输入密码,确认输入密码
+        string userName{""},firstPasswd{""},secondPasswd{""};
 
         cout << "Please input your name:";
         getline(cin,userName);          // 输入用户名
-        while( !isSamePasswd )
+        while( true )
         {
             cout << "Please input your passwd:";
             getline(cin,firstPasswd);   // 输入密码
@@ -97,7 +99,7 @@ void LoginWnd::registerAccount()
                 cout << "Two passwd is same,Register success!" << endl;
                 config.setValue( QString::fromStdString(userName),
                                  QString::fromStdString(firstPasswd) );
-                isSamePasswd = true;
+                break;
             }
             else
             {
@@ -109,17 +111,19 @@ void LoginWnd::registerAccount()
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Register account error!");
 }
 
-void LoginWnd::loginAccount()
+void LoginWnd::login()
 {
     try
     {
+        //获取用户账户信息配置文件的路径
         QString path = APP::g_pAppService->pathSetting().userAccountPath();
         QSettings config(path,QSettings::IniFormat);
+        //输入的用户名及密码
         string name {""},passwd{""};
-        bool isLogin {false};
+        //用户输入名称的索引,0为配置文件中没有该账户,否则表示配置文件存在该账户
         int inputName {0};
 
-        while( !isLogin )
+        while( true )
         {
             cout << "Please input user name:";
             getline(cin,name);                              // 获得用户名输入
@@ -133,8 +137,8 @@ void LoginWnd::loginAccount()
                 auto inputPasswd = config.value(QString::fromStdString(name)).toString();
                 if ( inputPasswd.toStdString() == passwd )  // 判断密码是否正确
                 {
-                    isLogin = true;
                     cout << "Longin successful!\n" << endl; // 登录成功
+                    break;
                 }
                 else
                 {

@@ -1,6 +1,10 @@
 #ifndef BOARD_HPP
 #define BOARD_HPP
 
+#include <QDomDocument>
+#include <QFile>
+#include <QTextStream>
+
 #include "Point.hpp"
 #include "Rectangle.hpp"
 #include "MeasuredObj.hpp"
@@ -55,7 +59,17 @@ namespace Job
         //>>>-----------------------------------------------------------------------
         // member function
 
-        void writeToXml(std::string& path);
+        /**
+        *  @brief  writeBoardDataToXml
+        *           将Board相关数据写入到xml文件,具体信息如下:
+        *               1.Board的名字,长,宽,及原点坐标
+        *               2.检测出所有错误元件的信息(如元件名称,x,y轴坐标等)
+        *  @param  inspectionData : 在insepctionData根节点下创建board信息节点
+        *          inspectionDataInfo:将board信息节点添加到inspectionDataInfo节点下
+        *  @return N/ A
+        */
+        void writeBoardDataToXml(QDomDocument& inspectionData,
+                                 QDomElement& inspectionDataInfo);
 
         /**
         *  @brief   检测基板上的所有原件
@@ -70,7 +84,7 @@ namespace Job
         //>>>-----------------------------------------------------------------------
         // comment variant
 
-        std::string m_name{"\0"};
+        std::string m_name{""};
         std::vector<MeasuredObj*> m_pObjs;  //board上的检测对象列表
         SSDK::Point m_originPoint;          //机器原点坐标，检测时以这一点作为board的原点
         SSDK::Rectangle m_recatangle;       //和board大小、位置信息贴合的矩形

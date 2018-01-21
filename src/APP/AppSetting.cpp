@@ -11,11 +11,7 @@ AppSetting::AppSetting()
 {
     try
     {
-        this->m_companyName = "Sung";
-        this->m_machineName = "SPI" ;
-        this->m_theme = Theme::BLACK ;
-        this->m_language = Language::CN ;
-        this->m_laneMode = LaneMode::SIMULATOR ;
+
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Constructor error!");
 }
@@ -51,7 +47,21 @@ void AppSetting::load(const QString& appPath)
 
             //>>>---------------------------------------------------------------
             // 加载MachineName
-            this->m_machineName = configFile.value("Machine").toString();
+            QString machineType = configFile.value("MachineType").toString();
+            if( machineType.toUpper().toStdString() == VAR_TO_STR(MachineType::AOI) )
+            {
+                this->m_machineType = MachineType::AOI;
+            }
+            else if (machineType.toUpper().toStdString() == VAR_TO_STR(MachineType::SPI))
+            {
+                this->m_machineType = MachineType::SPI;
+            }
+            else
+            {
+                auto machineType = VAR_TO_STR(MachineType::AOI);
+                configFile.setValue("MachineType",machineType.c_str());
+                this->m_machineType = MachineType::AOI;
+            }
 
             //>>>---------------------------------------------------------------
             // 加载Theme
@@ -118,11 +128,12 @@ void AppSetting::load(const QString& appPath)
             QSettings configFile(appPath,QSettings::IniFormat);
 
             configFile.setValue( "Company",m_companyName);
-            configFile.setValue( "Machine",m_machineName);
+            configFile.setValue( "MachineType",
+                                 QString::fromStdString(VAR_TO_STR(MachineType::AOI)));
             configFile.setValue( "Theme",
                                  QString::fromStdString(VAR_TO_STR(Theme::BLACK)) );
             configFile.setValue( "Language",
-                                  QString::fromStdString(VAR_TO_STR(Language::EN)) );
+                                 QString::fromStdString(VAR_TO_STR(Language::EN)) );
             configFile.setValue( "LaneMode",
                                  QString::fromStdString(VAR_TO_STR(LaneMode::DUAL_LANE)) );
         }

@@ -38,23 +38,32 @@ void MainWnd::run()
 {
     try
     {
+        srand(time(NULL));
         // 扫描检测程式
         this->scanJobFolder();
 
         // 加载完程式,检测
-        cout << "Press \"y\" to inspect:" << endl;
-        char inspect {'y'};
-        cin >> inspect;
-        if( 'y' == inspect )
+        cout << "Press \"y\" to inspect:";
+        char inspectValue;
+        string xmlFileName{""};
+        QString xmlPath{""};
+        cin >> inspectValue;
+        if( 'y' == inspectValue || 'Y' == inspectValue )
         {
             do
             {
                 this->inspectClick();
-                cout << "Press \"y\" to inspect again:" << endl;
+                xmlFileName = APP::g_pSequence->inspectionManager().inspectionData().board().name()
+                               + "_" + DataGenerator::getCurrentTime()+".xml";
+                xmlPath = APP::g_pAppService->pathSetting().exportXmlPath() +
+                                   xmlFileName.c_str();
+                APP::g_pSequence->inspectionManager().inspectionData().writeInspectionDataToXml(
+                xmlPath);
+                cout << "Press \"y\" to inspect again:";
                 cin.clear();
                 cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                cin >> inspect;
-            }while ( 'y' == inspect );
+                cin >> inspectValue;
+            }while ( 'y' == inspectValue || 'Y' == inspectValue );
         }
         cout << "Quit ..." << endl;
     }
@@ -97,7 +106,7 @@ void MainWnd::scanJobFolder()
         int index {-1};
         do  // 选择创建程式或需要加载的程式文件
         {
-            cout << "\nChoice number to create or load job:\n";
+            cout << "\nChoice number to create or load job:";
             cin >> index;
             if(!cin)       // 输入不是数字
             {
@@ -109,10 +118,14 @@ void MainWnd::scanJobFolder()
         }
         while( index > list.size() || index < 0);
         //>>>-------------------------------------------------------------------
-        // 3.创建程式或加载程式
-        if( 0 == index )
+        // 3.创建或加载程式
+
+        if( 0 == index )                // 创建新的程式
         {
-            // 创建新的程式
+            // 在内存中生成默认的检测数据
+            DataGenerator datagenerator;
+            datagenerator.generateInspectionData(g_pSequence->inspectionManager().inspectionData());
+
             QString jobPath {path};
             string jobName;
             cout << "Please input job name:";
@@ -124,7 +137,7 @@ void MainWnd::scanJobFolder()
         {
             // 加载用户选择的程式
             QString jobPath = list.at(index-1).filePath();
-            loadJob(jobPath);
+            g_pSequence->inspectionManager().loadInspectionData(jobPath);
         }
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Catch exception and rethrow");
@@ -364,9 +377,6 @@ void MainWnd::loadJob(const QString& jobPath)
 
 void MainWnd::createDefaultJob(const QString& jobName)
 {
-    // 在内存中生成默认的检测数据
-    DataGenerator datagenerator;
-    datagenerator.generateInspectionData(g_pSequence->inspectionManager().inspectionData());
     SqliteDB sqlite;
     try
     {

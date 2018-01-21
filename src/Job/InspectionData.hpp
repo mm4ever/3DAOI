@@ -40,7 +40,12 @@ namespace Job
         //>>>-----------------------------------------------------------------------
         //member function
 
-        void writeToXml(std::string& path);
+        /**
+        *  @brief
+        *  @param
+        *  @return
+        */
+        void writeInspectionDataToXml(QString path);
 
         /**
         *  @brief   检测本次程式对应的基板
@@ -48,7 +53,6 @@ namespace Job
         *  @return  N/A
         */
         void inspect();
-
 
     private:
 

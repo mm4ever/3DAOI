@@ -41,12 +41,15 @@ namespace APP
         DUAL_LANE       // 双轨机,有两条轨道的机器
     };
 
+    enum class MachineType
+    {
+        AOI,            //设备的检测类型为检测电路板上的元器件
+        SPI             //设备的检测类型为检测电路板上的锡膏
+    };
+
     /**
      *  @brief AppSetting
-     *          AppSetting类是存放配置文件的类,配置文件包括主题、语言等
-     *      不是程序运行时所必需的配置;如果不存在则直接创建默认的配置,存在则判
-     *      断配置是否正确,不正确则使用默认参数.
-     *
+     *          AppSetting类是软件应用层的基本属性设置,如设置软件的主题,语言等
      *  @author peter
      *  @version 1.00 2018-01-06 peter
      *                note:create it
@@ -59,33 +62,21 @@ namespace APP
         // constructor & destructor
 
         AppSetting();
-        virtual~AppSetting();
+
+        virtual ~AppSetting();
 
         //>>>-------------------------------------------------------------------
         // get & set function
 
-        void setCompanyName(QString companyName)
-        {
-            this->m_companyName = companyName;
-        }
         QString& companyName(){return this->m_companyName;}
 
-        void setMachineName(QString machineName)
-        {
-            this->m_machineName = machineName;
-        }
-        QString& machineName(){return this->m_machineName;}
+        MachineType& machineType(){return this->m_machineType;}
 
-        void setTheme(Theme theme){ this->m_theme = theme;}
         Theme& theme(){return this->m_theme;}
 
-        void setLanguage(Language lang){ this->m_language = lang;}
         Language& language(){return this->m_language;}
 
-        void setLaneMode(LaneMode laneMode){ this->m_laneMode = laneMode;}
         LaneMode& laneMode(){return this->m_laneMode;}
-
-
 
         //>>>-------------------------------------------------------------------
         // member function
@@ -106,7 +97,8 @@ namespace APP
         // member variant
 
         QString m_companyName {"Sung"};             // 公司名称
-        QString m_machineName {"SPI"};              // 机器名称
+        // 机器的类型,AOI为检测电路板上的元器件,SPI为检测电路板上的锡膏
+        MachineType m_machineType {MachineType::AOI};
         Theme m_theme {Theme::BLACK};               // 软件主题
         Language m_language {Language::CN};         // 软件语言
         LaneMode m_laneMode {LaneMode::SIMULATOR};  // 机器种类
