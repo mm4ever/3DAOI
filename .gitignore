@@ -3,21 +3,21 @@
 
 /debug/
 /release/
-/src/Job/build/linux/debug/*.so
-/src/Job/build/linux/debug/*.so.*
+/src/Job/build/linux/release/*.so
+/src/Job/build/linux/release/*.so.*
 
-/src/SSDK/build/linux/debug/*.so
-/src/SSDK/build/linux/debug/*.so.*
+/src/SSDK/build/linux/release/*.so
+/src/SSDK/build/linux/release/*.so.*
 
 /src/Job/.qmake.stash
 /src/Job/.qmake.cache
-/src/Job/build/linux/debug/.qmake.stash
-/src/Job/build/linux/debug/.qmake.cache
+/src/Job/build/linux/release/.qmake.stash
+/src/Job/build/linux/release/.qmake.cache
 
 /src/SSDK/.qmake.stash
 /src/SSDK/.qmake.cache
-/src/SSDK/build/linux/debug/.qmake.stash
-/src/SSDK/build/linux/debug/.qmake.cache
+/src/SSDK/build/linux/release/.qmake.stash
+/src/SSDK/build/linux/release/.qmake.cache
 
 *~
 *.autosave

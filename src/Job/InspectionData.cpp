@@ -11,12 +11,16 @@ InspectionData::InspectionData()
     {
 
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("构造函数出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Constructor error!");
 }
 
 InspectionData::~InspectionData()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -29,7 +33,7 @@ void InspectionData::writeInspectionDataToXml(QString path)
 {
     try
     {
-        //>>>--------------------------------------------------------------------------------------------
+        //>>>-------------------------------------------------------------------
         //step1
         //定义一个QDomDocument xml文档类的对象
         //在该文档下生成一个inspectionDataInfo节点,将版本号,上次编辑时间写入在该节点下
@@ -44,13 +48,13 @@ void InspectionData::writeInspectionDataToXml(QString path)
                              QString::fromStdString(this->lastEditingTime()));
         inspectionData.appendChild(inspectionDataInfo);
 
-        //>>>---------------------------------------------------------------------------------------------
+        //>>>-------------------------------------------------------------------
         //step2
         //将board信息写入到inspectionData文档中的inspectionDataInfo节点下
 
         this->m_board.writeBoardDataToXml(inspectionData,inspectionDataInfo);
 
-        //>>>---------------------------------------------------------------------------------------------
+        //>>>-------------------------------------------------------------------
         //step3
         //设置文件路径,并将inspectionData中的数据写入到该路径下的xml文件中
 
@@ -58,7 +62,7 @@ void InspectionData::writeInspectionDataToXml(QString path)
 
         if (!file.open(QFile::WriteOnly | QFile::Text))     //判断文件是否被打开
         {
-            THROW_EXCEPTION("打开文件失败!!");
+            THROW_EXCEPTION("Open file error!");
         }
 
         QTextStream out(&file);                             //定义文本输出流
@@ -74,7 +78,7 @@ void InspectionData::inspect()
     {
         this->m_board.inspect();
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("检测程式文件时出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Inspect error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

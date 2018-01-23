@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+
 #include <QSettings>
 #include <QFile>
 
@@ -52,14 +53,14 @@ namespace APP
         virtual ~DataGeneratorSetting();
 
         //>>>-------------------------------------------------------------------
-        //get & set function
+        // get & set function
 
         std::vector<std::vector<ComponentStyle> *> &componentTypesVector() {return m_componentTypesVector;}
 
         std::vector<QString>& componentTypes() {return m_componentTypes;}
 
         //>>>-------------------------------------------------------------------
-        //member function
+        // member function
 
         /**
          * @brief load
@@ -78,7 +79,7 @@ namespace APP
 
     private:
         //>>>-------------------------------------------------------------------
-        //member variant
+        // member variant
 
         std::vector<std::vector<ComponentStyle> *> m_componentTypesVector;//所有元件类型
         std::vector<QString> m_componentTypes; //元件类型大类，例如CHIP,SOP,QFN等

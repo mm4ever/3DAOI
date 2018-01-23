@@ -1,7 +1,8 @@
 #include "Board.hpp"
 
-using namespace Job;
 using namespace std;
+
+using namespace Job;
 
 //>>>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // constructor & destructor
@@ -12,7 +13,7 @@ Board::Board()
     {
 
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("构造函数出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Constructor error!");
 }
 
 Board::~Board()
@@ -125,7 +126,7 @@ void Board::inspect()
             this->m_pObjs[i]->inspect();
         }
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("检测基板元件出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Inspect error!");
 }
 
 //<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

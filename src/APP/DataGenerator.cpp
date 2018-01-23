@@ -5,19 +5,31 @@ using namespace std;
 using namespace APP;
 using namespace Job;
 
+//>>>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// constructor & destructor
+
 DataGenerator::DataGenerator()
 {
     try
     {
 
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("构造函数出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Constructor error!");
 }
 
 DataGenerator::~DataGenerator()
 {
+    try
+    {
 
+    }
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Destructor error!");
 }
+
+//<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//>>>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// member function
 
 std::string DataGenerator::getCurrentTime()
 {
@@ -30,7 +42,7 @@ std::string DataGenerator::getCurrentTime()
         strftime(sTime, sizeof(sTime), "%04Y%02m%02d%H%M%S", tmp_time);
         return sTime;
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("生成当前时间出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Get current time error!");
 }
 
 string DataGenerator::getName(int iVar, string sVar)
@@ -40,7 +52,7 @@ string DataGenerator::getName(int iVar, string sVar)
         string name = sVar + "_" + SSDK::FormatConvertion::intToString(iVar);
         return name;
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("生成名字出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Get name error!");
 }
 
 bool DataGenerator::check(double centralX, double centralY,
@@ -59,14 +71,14 @@ bool DataGenerator::check(double centralX, double centralY,
         }
         return true;
     }
-    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("检测元件是否交叉重叠出错");
+    CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("Check error!");
 }
 
 void DataGenerator::generateBoardData(Board &board)
 {
     try
     {
-        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //>>>-------------------------------------------------------------------
         //step1 加载元件配置文件
 
         QString dataSettingPath = "./config/DataGenerateSetting.ini"; //数据配置文件路径
@@ -74,7 +86,7 @@ void DataGenerator::generateBoardData(Board &board)
         m_dataSetting.load(dataSettingPath);
 
 
-        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //>>>-------------------------------------------------------------------
         //step2 从配置文件读取基板尺寸信息并设置到基板中
 
         string boardName = "Board";
@@ -91,10 +103,10 @@ void DataGenerator::generateBoardData(Board &board)
         board.rectangle().centerPoint().setPosX((boardWidth-boardOriginX)/2);
         board.rectangle().centerPoint().setPosY((boardHeight-boardOriginY)/2);
 
-        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //>>>-------------------------------------------------------------------
         //step3 生成基板FicuicialMark数据
 
-        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //>>>-------------------------------------------------------------------
         //step3.1 定义FicuicialMark相关变量
         int measuredObjId = 0; //元件id
         int libraryId = 0; //库的序号
@@ -113,7 +125,7 @@ void DataGenerator::generateBoardData(Board &board)
         double fiducialMarkAngle = configFile.value("FICUICIALMARK/fiducialMarkAngle").toDouble(); //基准点角度
         int componentIdx = fiducialMarkCnt; //元件索引
 
-        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //>>>-------------------------------------------------------------------
         //step3.2 生成FicuicialMark的名字、序号等数据
         board.pObjs().push_back(new FiducialMark(measuredObjId++,
                                                  getName(nameId++,fiducialMarkName),
@@ -128,11 +140,11 @@ void DataGenerator::generateBoardData(Board &board)
                                                  fiducialMarkWidth,fiducialMarkHeight,
                                                  fiducialMarkAngle));
 
-        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //>>>-------------------------------------------------------------------
         //step3.2 生成FicuicialMark的library数据
         for (int i = 0; i < fiducialMarkCnt; ++i)
         {
-            //>>>-------------------------------------------------------------------------------------------------------------------------------------
+            //>>>---------------------------------------------------------------
             //step3.2.1 生成FiducialMark的library名字、序号等数据
             for (uint j = 0; j < board.pLibs().size(); ++j)
             {
@@ -148,7 +160,7 @@ void DataGenerator::generateBoardData(Board &board)
                 board.pObjs()[i]->pLib()->name() = libPrefix + fiducialMarkName;
                 board.pLibs().push_back(board.pObjs()[i]->pLib());
 
-                //>>>-------------------------------------------------------------------------------------------------------------------------------------
+                //>>>-----------------------------------------------------------
                 //step3.2.2 生成FiducialMark的library的mainItem数据
                 board.pObjs()[i]->pLib()->mainItem().setLibId(libraryId++);
                 MainItem& mainItem = board.pObjs()[i]->pLib()->mainItem();
@@ -160,7 +172,7 @@ void DataGenerator::generateBoardData(Board &board)
                 mainItem.name() = board.pObjs()[i]->pLib()->name();
                 mainItem.setPAlg(new Alg3D);
 
-                //>>>-------------------------------------------------------------------------------------------------------------------------------------
+                //>>>-----------------------------------------------------------
                 //step3.2.3 生成FiducialMark的library的subItem数据
                 double subItemAngle = 0; //subItem的角度
                 string subItemName = "subItem_" + fiducialMarkName + "1"; //subItem的名字,subItem只有１个
@@ -184,10 +196,10 @@ void DataGenerator::generateBoardData(Board &board)
             }// end of if(nullptr == board.pObjs()[i]->pLib())
         }//end of for (int i = 0; i < fiducialMarkCnt; ++i)
 
-        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //>>>-------------------------------------------------------------------
         //step4 生成基板上元件信息
 
-        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //>>>-------------------------------------------------------------------
         //step4.1 定义元件相关变量
         int cycleCnt = 0; //循环次数
         double componentWidth = 0; //元件宽
@@ -203,13 +215,13 @@ void DataGenerator::generateBoardData(Board &board)
         int chipCnt = configFile.value("chipCnt").toInt(); //chip类型的元件个数
         int otherPerComponentTypeCnt = configFile.value("otherComponentCnt").toInt(); //其他元件类型的个数
 
-        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+        //>>>-------------------------------------------------------------------
         //step4.2 生成所有所有的元件
         srand(time(NULL));
         //遍历元件大类的类型，比如CHIP,SOP,QFN等
         for (uint i = 0; i < this->m_dataSetting.componentTypesVector().size();++i)
         {
-            //>>>-------------------------------------------------------------------------------------------------------------------------------------
+            //>>>---------------------------------------------------------------
             //step4.2.1 获取每个大类的元件数量
             if("CHIP"==(this->m_dataSetting.componentTypes()[i].toStdString()))
             {
@@ -220,7 +232,7 @@ void DataGenerator::generateBoardData(Board &board)
                 perComponentTypeCnt = otherPerComponentTypeCnt;
             }
 
-            //>>>-------------------------------------------------------------------------------------------------------------------------------------
+            //>>>---------------------------------------------------------------
             //step4.2.2 生成所有元件，如果循环次数大于50000次默认已经不能生成合适的元件
             for (int j = 0; j < perComponentTypeCnt && cycleCnt < 50000;)
             {
@@ -237,7 +249,7 @@ void DataGenerator::generateBoardData(Board &board)
                 componentWidth = (this->m_dataSetting.componentTypesVector()[i])->at(componentTypeIdx).width;
                 componentHeight = (this->m_dataSetting.componentTypesVector()[i])->at(componentTypeIdx).height;
 
-                //>>>-------------------------------------------------------------------------------------------------------------------------------------
+                //>>>-----------------------------------------------------------
                 //step4.2.2.1 生成符合要求的元件
                 //检测生成数据的是否符合要求
                 if(check(componentCentralX,componentCentralY,
@@ -245,7 +257,7 @@ void DataGenerator::generateBoardData(Board &board)
                          (this->m_dataSetting.componentTypesVector()[i])->at(componentTypeIdx).height,
                          board.pObjs()))
                 {
-                    //>>>-------------------------------------------------------------------------------------------------------------------------------------
+                    //>>>-------------------------------------------------------
                     //step4.2.2.1.1 生成元件名字、序等信息
                     componentType = (this->m_dataSetting.componentTypesVector()[i])->at(componentTypeIdx).componentName.toStdString();
                     board.pObjs().push_back(new Component(measuredObjId++,
@@ -256,7 +268,7 @@ void DataGenerator::generateBoardData(Board &board)
                                                           componentWidth,
                                                           componentHeight));
 
-                    //>>>-------------------------------------------------------------------------------------------------------------------------------------
+                    //>>>-------------------------------------------------------
                     //step4.2.2.1.2 生成元件的library的名字序号等信息
                     componentLibType = libPrefix + componentType;
                     for (uint k = 0; k < board.pLibs().size(); ++k)
@@ -276,7 +288,7 @@ void DataGenerator::generateBoardData(Board &board)
                         board.pObjs()[componentIdx]->pLib()->setId(libraryId++);
                         board.pLibs().push_back(board.pObjs()[componentIdx]->pLib());
 
-                        //>>>-------------------------------------------------------------------------------------------------------------------------------------
+                        //>>>---------------------------------------------------
                         //step4.2.2.3 生成元件的library的mainItem信息
                         MainItem& item = board.pObjs()[componentIdx]->pLib()->mainItem();
                         item.setLibId(board.pObjs()[componentIdx]->pLib()->id());
@@ -308,3 +320,5 @@ void DataGenerator::generateInspectionData(InspectionData &inspectionData)
     }
     CATCH_AND_RETHROW_EXCEPTION_WITH_OBJ("生成检测数据出错");
 }
+
+//<<<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

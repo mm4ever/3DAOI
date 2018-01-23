@@ -13,7 +13,7 @@ Circle::Circle()
     }
     catch(...)
     {
-        THROW_EXCEPTION("构造函数出错");
+        THROW_EXCEPTION("Constructor error!");
     }
 }
 
@@ -28,7 +28,7 @@ Circle::Circle(double radius, double posX, double posY)
     }
     catch(...)
     {
-        THROW_EXCEPTION("构造函数出错");
+        THROW_EXCEPTION("Constructor error!");
     }
 }
 
